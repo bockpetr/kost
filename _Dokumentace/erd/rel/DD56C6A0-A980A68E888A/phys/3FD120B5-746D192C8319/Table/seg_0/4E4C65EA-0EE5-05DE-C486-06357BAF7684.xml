@@ -1,0 +1,31 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="ROLE" directorySegmentName="seg_0" id="4E4C65EA-0EE5-05DE-C486-06357BAF7684">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ID" id="0B386207-39D5-906F-2D97-A15B22A17E23">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NAZEV" id="4BBA4924-316E-9042-CD09-37C73ED1A3DD">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_ROLE" id="2428EE0E-AB22-4DDE-917D-3E11D945D8FA">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

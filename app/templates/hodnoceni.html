@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Hodnocení vín{% endblock %}
+
+{% block content %}
+<div style="padding: 2rem;">
+    <div style="max-width: 95%; margin: 0 auto;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 style="color: var(--primary); margin: 0;">
+                Hodnocení vín ({{ active_rocnik.rok }})
+            </h2>
+        </div>
+
+        {% if not wines_data %}
+            <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); text-align: center;">
+                <p style="font-size: 1.1rem; color: #666;">
+                    V tomto ročníku zatím nejsou žádná cizí vína k hodnocení.
+                </p>
+            </div>
+        {% else %}
+            
+            <form method="post" action="/vina/hodnoceni">
+                
+                <div style="text-align: right; margin-bottom: 15px;">
+                    <button type="submit" class="btn">Uložit hodnocení</button>
+                </div>
+
+                <div style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow-x: auto;">
+                    <table class="wines-table" style="width: 100%; min-width: 1000px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%;">Název vína</th>
+                                <th style="width: 10%;">Vinař</th>
+                                <th style="width: 8%;">Barva</th>
+                                <th style="width: 10%;">Odrůda</th>
+                                <th style="width: 10%;">Přívlastek</th>
+                                <th style="width: 8%;">Sladkost</th>
+                                <th style="width: 50px;">Rok</th>
+                                <th style="width: 80px; text-align: center;">Body</th>
+                                <th>Poznámka</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in wines_data %}
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="font-weight: bold;">
+                                    <a href="/vino/{{ item.vino.id }}" target="_blank" style="text-decoration: none; color: inherit;" title="Otevřít detail">
+                                        {{ item.vino.nazev }}
+                                    </a>
+                                </td>
+                                
+                                <td>{{ item.vino.vinar.jmeno }}</td>
+
+                                <td>{{ item.vino.barva or '-' }}</td>
+                                
+                                <td>{{ item.vino.odruda }}</td>
+
+                                <td>{{ item.vino.privlastek or '-' }}</td>
+
+                                <td>{{ item.vino.sladkost or '-' }}</td>
+                                
+                                <td>{{ item.vino.rok_sklizne }}</td>
+
+                                <td style="text-align: center;">
+                                    <input type="number" 
+                                           name="body_{{ item.vino.id }}" 
+                                           min="0" max="100"
+                                           value="{{ item.hodnoceni.body if item.hodnoceni else '' }}"
+                                           placeholder="-"
+                                           style="width: 60px; padding: 6px; border: 2px solid #ddd; border-radius: 6px; font-weight: bold; text-align: center; color: var(--primary);">
+                                </td>
+                                
+                                <td>
+                                    <input type="text" 
+                                           name="poznamka_{{ item.vino.id }}" 
+                                           placeholder="..."
+                                           value="{{ item.hodnoceni.poznamka if item.hodnoceni and item.hodnoceni.poznamka else '' }}"
+                                           style="width: 100%; min-width: 150px; padding: 6px; border: 1px solid #ddd; border-radius: 4px;">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="submit" class="btn">Uložit hodnocení</button>
+                </div>
+
+            </form>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .wines-table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+    .wines-table th {
+        font-size: 0.9rem;
+        color: #555;
+        white-space: nowrap; /* Aby se text v hlavičce nezalamoval */
+    }
+    .wines-table td {
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
+</style>
+{% endblock %}

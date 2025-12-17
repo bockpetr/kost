@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}{{ wine.nazev }}{% endblock %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    
+    <a href="/" class="back-link">&larr; Zpět na seznam</a>
+
+    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 15px;">
+        <h1 style="color: var(--primary); margin-top: 0;">{{ wine.nazev }}</h1><br>
+        <p style="font-size: 1.1rem;">
+            <strong>Vinař:</strong> <a href="/vinar/{{ wine.vinar_id }}">{{ wine.vinar.jmeno }}</a><br>
+            <strong>Barva:</strong> {{ wine.barva }}<br>
+            <strong>Odrůda:</strong> {{ wine.odruda }}<br>
+            <strong>Přívlastek:</strong> {{ wine.privlastek }}<br>
+            <strong>Sladkost:</strong> {{ wine.sladkost }}<br>
+            <strong>Ročník sklizně:</strong> {{ wine.rok_sklizne }}<br>
+        </p>
+    </div>
+
+    <h3>Hodnocení poroty</h3>
+    {% if ratings %}
+        <div style="display: grid; gap: 15px;">
+            {% for r in ratings %}
+            <div style="background: white; padding: 15px; border-left: 5px solid var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <strong>{{ r.hodnotitel.jmeno }}</strong>
+                    <span style="font-weight: bold; font-size: 1.2rem;">{{ r.body }} b.</span>
+                </div>
+                <p style="margin: 0; color: #555; font-style: italic;">"{{ r.poznamka }}"</p>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Toto víno zatím nebylo hodnoceno.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DomainFile class="oracle.dbtools.crest.model.design.DomainFileWrapper" fileName="kost_Domains">
+<domains>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="NUMERIC_10_0_0" id="05D7C86F-F270-443C-61B3-2CDE9077BD03">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>10</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>0</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT019</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_50" id="19B9A928-E746-B9D4-4694-88A15BAEB7D4">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>50</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_100" id="28D014EA-E243-6339-55F8-C1CE0E9D41AE">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>100</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_200" id="63D4B9DB-DC2E-DA63-FBB7-EB10D190598A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>200</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="NUMERIC_4_0_0" id="69750D1B-E01B-F5BF-981A-292CBACA7212">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>4</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>0</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT019</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_20" id="87AC1C26-AE2F-8B77-A607-4B9A3E91159A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>20</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_255" id="9386B047-9359-49CD-BBB1-A9954310CEF0">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>255</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="VARCHAR_0_0_1000" id="9ED80445-2DB8-6B32-1843-851820E09D34">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>0</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>1000</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT024</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="NUMERIC_3_0_0" id="B406273F-8CBA-92EB-19C7-33D051AF0901">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>3</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>0</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT019</logicalDatatype>
+</Domain>
+<Domain class="oracle.dbtools.crest.model.design.Domain" name="NUMERIC_1_0_0" id="FCFCCDF4-B571-396E-B335-F6BC48D3A45A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<avTSortOrder>0</avTSortOrder>
+<dataTypePrecision>1</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<dataTypeSize>0</dataTypeSize>
+<fileName>kost_Domains</fileName>
+<logicalDatatype>LOGDT019</logicalDatatype>
+</Domain>
+</domains>
+</DomainFile>

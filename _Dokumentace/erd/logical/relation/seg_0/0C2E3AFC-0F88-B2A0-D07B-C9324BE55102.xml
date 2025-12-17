@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK_HODNOCENI_VINO" directorySegmentName="seg_0" id="0C2E3AFC-0F88-B2A0-D07B-C9324BE55102">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>F9A69B51-2991-B071-C5F8-BF076DA9108E</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<sourcePk>7A9E6C11-C671-CA2F-3E14-AEC68663AC82</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>F952658E-F513-7E2F-9CEE-29E925D1532A</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>19EBD60C-2E3B-974D-F1B5-3FC0E79F5434</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

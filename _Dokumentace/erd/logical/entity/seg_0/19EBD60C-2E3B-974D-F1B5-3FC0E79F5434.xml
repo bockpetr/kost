@@ -1,0 +1,109 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="19EBD60C-2E3B-974D-F1B5-3FC0E79F5434" name="HODNOCENI">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>38989C82-31A9-C687-BD18-00546B170032</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="FF4D8FDA-2190-AE3A-C671-FA5282FEDD6A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>FCBB8C64-E13A-27B0-2FEA-410AF58A0672</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="BODY" id="4AEAFA34-919A-72CF-EE40-BF55F886EC2C">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>9BE2C448-3043-C7BB-A77B-22106D93AE1B</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<constraintName>CK_BODY_RANGE</constraintName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>B406273F-8CBA-92EB-19C7-33D051AF0901</domain>
+<checkConstraint>
+<implementationDef dbType="Oracle Database 12c" definition="&quot;BODY&quot; BETWEEN 0 AND 100"/>
+</checkConstraint>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="POZNAMKA" id="A20DADCA-20F9-DBA2-9116-DAF96F1DD72D">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>94603274-53C7-5937-F8E2-8EE10319136D</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>9ED80445-2DB8-6B32-1843-851820E09D34</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="VINO ID" id="54348E44-50A3-3442-9537-2C1EC6F66938">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>0C2E3AFC-0F88-B2A0-D07B-C9324BE55102</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<referedAttribute>D19D5C70-8D57-8CC8-5172-0C54C35A6081</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="HODNOTITEL ID" id="E730881B-6690-5AA8-FFA1-70BA01E1BAA0">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>784ABE7A-51E9-990B-F3A7-DEA7BEFF29B9</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<referedAttribute>E56D02BC-D107-0EC6-D2C2-4915489684BA</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D2720146-9A1B-9856-7EA1-5FEEFD844B34" name="PK HODNOCENI">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>C33438C7-6DE6-EAB3-7597-165575BD029F</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>FF4D8FDA-2190-AE3A-C671-FA5282FEDD6A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A98EDFD3-A42C-2B5F-33E0-A556A927521D" name="USERROLE">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>B19B0BCF-CA8D-541B-31CF-94583082712C</importedID>
+<ordsAlias>user_role</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="7530D648-E7FF-E5D9-53E9-065D4CB3B5DF">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>7CB6ADED-2E70-2E60-8C9C-6CB0105E0B5E</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="USER_ID" id="23F5C3B9-9E91-A08A-0277-002C2EFE793E">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>0A4E1D20-A5C7-BDC3-E0AB-672C37439845</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7F8AA251-1694-79F1-398E-C28443A9D107" referredColumn="D326D083-28B0-7D54-60D3-70756FF1681B"/>
+</associations>
+</Column>
+<Column name="ROLE_ID" id="B5F61095-9548-237D-0AAB-5907E9639EB2">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>3B0A41DF-7DDD-A107-D84E-5E5102356F7F</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F03A2BAF-7411-9134-E335-0A1942DB5883" referredColumn="0B386207-39D5-906F-2D97-A15B22A17E23"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8617CED2-5142-7BAF-E3F5-1DB6600131DA" name="PK_USERROLE">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>ED2531E8-AEF9-97FB-0DE6-B14474E9F900</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7530D648-E7FF-E5D9-53E9-065D4CB3B5DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F333051B-A311-53B4-FF49-A06470F1FF50" name="UK_USER_ROLE_PAIR">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>D7E3D930-5375-190D-3F95-BCE0D4CEE38A</importedID>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="23F5C3B9-9E91-A08A-0277-002C2EFE793E"/>
+<colUsage columnID="B5F61095-9548-237D-0AAB-5907E9639EB2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AB49C083-29EF-338F-E29F-0B90FCD4E09B" name="FK_USERROLE_ROLE">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B5F61095-9548-237D-0AAB-5907E9639EB2"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EDE77CCB-D3E5-EB2A-6C04-51CCBB4FD700" name="FK_USERROLE_USERS">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="23F5C3B9-9E91-A08A-0277-002C2EFE793E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,63 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FF32C197-0906-7341-D125-92E398C84DF2" name="ROCNIK">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>DD86A2E7-1543-A831-5E17-BC734240849F</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="42F9BC8E-74F8-597B-7427-43731DF7B3D9">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>10C5D747-851C-E4C5-1667-9026FF95E893</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ROK" id="56C439D7-879C-236F-40B4-47AF74715462">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>F44B0DEA-6940-2AA4-6921-7363195F8891</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>69750D1B-E01B-F5BF-981A-292CBACA7212</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IS_ACTIVE" id="328E6CFD-41F5-446E-70D7-C6BC44FE2755">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-13 02:30:33 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4880DAAF-1A14-4623-A0A4-0C3001072ABC" name="PK_ROCNIK">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>BEE5D911-8270-0EAB-E2F8-65A7CD49A248</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="42F9BC8E-74F8-597B-7427-43731DF7B3D9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

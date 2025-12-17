@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Správa ročníků{% endblock %}
+
+{% block content %}
+<div class="container-lg">
+    
+    <div class="page-header-row">
+        <h2 class="page-title">Správa ročníků</h2>
+        
+        <form method="post" action="/rocniky/pridat">
+            <button type="submit" class="btn">Nový ročník</button>
+        </form>
+    </div>
+
+    <div class="card" style="padding: 0;">
+        <table class="data-table" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Rok</th>
+                    <th>Stav</th>
+                    <th style="text-align: right;">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rocniky %}
+                <tr class="{% if r.is_active %}row-active{% endif %}" style="border-bottom: 1px solid #eee;">
+                        
+                    <td style="font-size: 1.2rem; font-weight: bold;">
+                        {{ r.rok }}
+                    </td>
+                        
+                    <td>
+                        {% if r.is_active %}
+                            <span style="font-weight: bold;">
+                                Aktivní
+                            </span>
+                        {% else %}
+                            <span>
+                                {% if loop.first %}
+                                    Připraven (Neaktivní)
+                                {% else %}
+                                    Archivováno
+                                {% endif %}
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td style="text-align: right;">
+                        
+                        {% if r.is_active %}
+                            <a href="/rocniky/deaktivovat/{{ r.id }}" class="btn-link"
+                                onclick="return confirm('Opravdu chcete deaktivovat aktuální ročník?');">
+                                Deaktivovat
+                            </a>
+
+                        {% elif loop.first %}
+                            <a href="/rocniky/aktivovat/{{ r.id }}" class="btn-link">Aktivovat</a>
+                        
+                        {% else %}
+                            <span>Nelze aktivovat</span>
+                        {% endif %}
+                        
+                        <a href="/rocniky/smazat/{{ r.id }}" class="btn-danger"
+                            onclick="return confirm('POZOR: Smazáním ročníku {{ r.rok }} se trvale vymažou i VŠECHNA VÍNA a HODNOCENÍ! Opravdu pokračovat?');">
+                            Smazat
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .row-active {
+        background-color: #f0fff4;
+    }
+    .data-table tr.row-active:hover {
+        background-color: #e6ffec !important;
+    }
+</style>
+{% endblock %}

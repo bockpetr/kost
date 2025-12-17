@@ -1,0 +1,70 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="USERS" directorySegmentName="seg_0" id="479EF5DB-853F-EF31-5A9F-FA1253556170">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="EMAIL" id="21321EF3-C8F0-9E9B-5303-FDB3802B2956">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="PASSWORD_HASH" id="3214F6A5-350D-1732-D162-EA6486F56719">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="JMENO" id="4F8818EA-8EF7-7A4B-A156-940F289EEF5A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="IS_ACTIVE" id="56F34B06-0202-648A-9FBE-52BF27E55081">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<defaultValue>1</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="ADRESA" id="5E2A7A8F-CFCA-0927-FA02-3A281499EFF9">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TELEFON" id="70B5AE0E-BDFF-1278-9CED-0E655597EE2B">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="LOGIN" id="90BFE727-DFC4-7ECC-D359-61D82527F427">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="D326D083-28B0-7D54-60D3-70756FF1681B">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="PK_USERS" id="A6F33567-F62A-2DAD-1233-EB6E5D55A42A">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="UK_USERS_LOGIN" id="EC758649-5020-0D48-F1A1-8A1E9ABB172C">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev12c>

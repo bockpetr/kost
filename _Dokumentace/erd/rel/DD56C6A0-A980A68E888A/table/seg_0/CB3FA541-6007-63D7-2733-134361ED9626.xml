@@ -1,0 +1,165 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CB3FA541-6007-63D7-2733-134361ED9626" name="VINO">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>DA770742-F00E-8D31-D7AD-05BFFE855486</importedID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="DF42A6FD-A28F-4213-D01C-E92269DAFC90">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>78770998-411F-6F23-130C-04C8CB95F4A7</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAZEV" id="3EF45B51-5355-303E-0E77-F20646A3C17C">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>94AAB6D5-AAF4-24A1-6353-E7A65B305C75</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>28D014EA-E243-6339-55F8-C1CE0E9D41AE</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="BARVA" id="E259236C-84CF-7152-D2B0-E9A91E15D021">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>ABEEFC62-AB19-A5BB-661D-4A0A94F91B8E</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>87AC1C26-AE2F-8B77-A607-4B9A3E91159A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ODRUDA" id="948EB137-8411-380F-5A86-0A74F74AA633">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>D1E16CF9-9198-127E-9A3F-A46B60A95BF3</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>19B9A928-E746-B9D4-4694-88A15BAEB7D4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PRIVLASTEK" id="4985B4D8-D036-615E-1F5C-888640A7C767">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-13 02:28:56 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>19B9A928-E746-B9D4-4694-88A15BAEB7D4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SLADKOST" id="1D7AACF6-5BB1-7207-435B-CEC1A0E668DD">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>069D551D-2CB7-ABE6-6A02-5FE927A6AB09</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>87AC1C26-AE2F-8B77-A607-4B9A3E91159A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ROK_SKLIZNE" id="3FA10567-53E4-8871-5DF6-34E650D8974B">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>AF81FBFA-AEE9-D6EE-C722-A525CC68F586</importedID>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>69750D1B-E01B-F5BF-981A-292CBACA7212</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VINAR_ID" id="2EF0F9B6-7372-DF94-8657-E3BD9009373A">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>2DA744AB-848F-ABF5-EBA5-4B0C703EF622</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="271FB1C0-D32D-B956-2609-6AC474C1FA79" referredColumn="D326D083-28B0-7D54-60D3-70756FF1681B"/>
+</associations>
+</Column>
+<Column name="ROCNIK_ID" id="10163976-04BF-93DA-0642-752D7ECDCDB7">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>79C5B1D7-AF04-3EF0-862F-C50C914AEF9E</importedID>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1E40C9EE-C8B1-B99B-82AA-83333053AF94" referredColumn="42F9BC8E-74F8-597B-7427-43731DF7B3D9"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="544DB212-D8EF-B46B-7264-15EDEE941857" name="PK_VINO">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>B15173ED-2F46-816E-6918-A068DE7D51FF</importedID>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DF42A6FD-A28F-4213-D01C-E92269DAFC90"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5E57E7F5-F1BC-8DC5-CF41-FB6B60385C2C" name="FK_VINO_ROCNIK">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="10163976-04BF-93DA-0642-752D7ECDCDB7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C6EE1ACA-57AF-BFA9-2951-5383730B8FBE" name="FK_VINO_USER">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="2EF0F9B6-7372-DF94-8657-E3BD9009373A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

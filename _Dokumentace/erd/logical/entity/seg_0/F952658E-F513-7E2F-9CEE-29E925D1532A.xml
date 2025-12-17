@@ -1,0 +1,159 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F952658E-F513-7E2F-9CEE-29E925D1532A" name="VINO">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>CB3FA541-6007-63D7-2733-134361ED9626</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID" id="D19D5C70-8D57-8CC8-5172-0C54C35A6081">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>DF42A6FD-A28F-4213-D01C-E92269DAFC90</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NAZEV" id="1FB7BCDD-5295-DAC6-0C62-B1C0C3A98C33">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>3EF45B51-5355-303E-0E77-F20646A3C17C</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>28D014EA-E243-6339-55F8-C1CE0E9D41AE</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="BARVA" id="CC2AE78B-665C-9D2C-CFEB-3BC4182DA1F6">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>E259236C-84CF-7152-D2B0-E9A91E15D021</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>87AC1C26-AE2F-8B77-A607-4B9A3E91159A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ODRUDA" id="A2B69793-CB15-615F-E048-7E028FB9FE06">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>948EB137-8411-380F-5A86-0A74F74AA633</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>19B9A928-E746-B9D4-4694-88A15BAEB7D4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PRIVLASTEK" id="5DF65ED4-CB20-79A1-7BD2-05D65FF1069B">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-13 02:33:18 UTC</createdTime>
+<generatorID>4985B4D8-D036-615E-1F5C-888640A7C767</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>19B9A928-E746-B9D4-4694-88A15BAEB7D4</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SLADKOST" id="77604E2B-1D0F-0343-831A-C163B265F58B">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>1D7AACF6-5BB1-7207-435B-CEC1A0E668DD</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>87AC1C26-AE2F-8B77-A607-4B9A3E91159A</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ROK SKLIZNE" id="25FAD24D-2DD1-6976-EFB9-19D6DB4E7FB8">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>3FA10567-53E4-8871-5DF6-34E650D8974B</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>69750D1B-E01B-F5BF-981A-292CBACA7212</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="VINAR ID" id="58917A0C-0035-8AB8-8216-5CCAE4FF04B7">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>C78BF303-3EFC-591B-F435-A92CB332D8A3</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<referedAttribute>E56D02BC-D107-0EC6-D2C2-4915489684BA</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ROCNIK ID" id="039C23F5-5363-EDE5-D00A-3358C6DE9FB6">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>21871F18-5BA1-4D61-BE71-244AB150D84A</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<referedAttribute>1D6B701F-FC62-9705-B178-DA0093994F90</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<domain>05D7C86F-F270-443C-61B3-2CDE9077BD03</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7A9E6C11-C671-CA2F-3E14-AEC68663AC82" name="PK VINO">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>544DB212-D8EF-B46B-7264-15EDEE941857</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>D19D5C70-8D57-8CC8-5172-0C54C35A6081</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Úprava uživatele{% endblock %}
+
+{% block content %}
+<div class="container-md">
+    <a href="/users/sprava" class="back-link">&larr; Zpět na správu uživatelů</a>
+
+    <div class="card">
+        <h2 class="card-header">Úprava uživatele: {{ user_to_edit.login }}</h2>
+
+        <form method="post" action="/users/upravit/{{ user_to_edit.id }}">
+
+            <div class="form-group">
+                <label for="jmeno" class="form-label">Jméno a příjmení:</label>
+                <input type="text" id="jmeno" name="jmeno" value="{{ user_to_edit.jmeno }}" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user_to_edit.email }}" class="form-control" required>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="telefon" class="form-label">Telefon:</label>
+                    <input type="text" id="telefon" name="telefon" value="{{ user_to_edit.telefon or '' }}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="adresa" class="form-label">Adresa:</label>
+                    <input type="text" id="adresa" name="adresa" value="{{ user_to_edit.adresa or '' }}" class="form-control">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px; padding: 20px; background: #f9f9f9; border-radius: 4px;">
+                <label class="form-label" style="margin-bottom: 10px;">Přiřazené role:</label>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    
+                    {% if user == user_to_edit.login %}
+                        <div style="padding: 10px; background: #e9ecef; border: 1px solid #ced4da; border-radius: 4px; color: #495057;">
+                            <em>Své vlastní role nemůžete měnit.</em>
+                            <ul style="margin: 5px 0 0 20px; padding-left: 0;">
+                                {% for role in user_to_edit.role %}
+                                    <li style="font-weight: bold; color: var(--primary);">{{ role.nazev }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                    {% else %}
+                        {% for role in all_roles %}
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                            <input type="checkbox" name="roles" value="{{ role.id }}" 
+                                   {% if role.id in current_role_ids %}checked{% endif %}
+                                   style="margin-right: 10px; transform: scale(1.2);">
+                            {{ role.nazev }}
+                        </label>
+                        {% endfor %}
+                        
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px; padding: 20px; background: #fffdf5; border: 1px solid #f0e6ce; border-radius: 4px;">
+                <label style="display: flex; align-items: center; cursor: pointer; font-weight: bold; color: var(--primary);">
+                    {% if user == user_to_edit.login %}
+                        <input type="checkbox" disabled checked 
+                        style="margin-right: 10px; transform: scale(1.2); cursor: not-allowed;">
+                        <input type="hidden" name="is_active" value="true">
+                        <span style="color: #999;">Účet je aktivní (nemůžete deaktivovat sami sebe)</span>
+                    {% else %}
+                        <input type="checkbox" name="is_active" value="true"
+                            {% if user_to_edit.is_active %}checked{% endif %}
+                            style="margin-right: 10px; transform: scale(1.2);">
+                        Účet je aktivní (povoleno přihlášení)
+                    {% endif %}
+                </label>
+                
+                <div style="margin-left: 28px; font-size: 0.85rem; color: #666; margin-top: 5px;">
+                    Pokud toto pole odškrtnete, uživatel se nebude moci přihlásit do systému.
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-full">Uložit změny</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

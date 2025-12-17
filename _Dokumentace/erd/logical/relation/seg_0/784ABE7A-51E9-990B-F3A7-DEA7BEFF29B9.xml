@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="FK HODNOCENI OSOBA" directorySegmentName="seg_0" id="784ABE7A-51E9-990B-F3A7-DEA7BEFF29B9">
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:12:11 UTC</createdTime>
+<generatorID>7A68E3E1-2044-9D8B-63D8-DEAAB794E1D6</generatorID>
+<ownerDesignName>erd</ownerDesignName>
+<engineerTo>
+<item key="DD56C6A0-32E5-0A65-3EB9-A980A68E888A" value="true"/>
+</engineerTo>
+<sourcePk>643C55CB-4533-6D8C-A5B6-FEA074E22DB0</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>A8E31DF6-7F9A-0102-97A9-8672D3C9CCB2</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>19EBD60C-2E3B-974D-F1B5-3FC0E79F5434</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

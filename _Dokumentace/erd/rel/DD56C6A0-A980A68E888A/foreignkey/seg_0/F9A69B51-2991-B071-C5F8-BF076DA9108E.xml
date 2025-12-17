@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F9A69B51-2991-B071-C5F8-BF076DA9108E" containerWithKeyObject="38989C82-31A9-C687-BD18-00546B170032" localFKIndex="1B64CA80-7B7D-BE7C-DC7D-25E429D4CC0A" name="FK_HODNOCENI_VINO">
+<sourceDDLFile>kost.sql</sourceDDLFile>
+<createdBy>bockp</createdBy>
+<createdTime>2025-12-07 00:11:49 UTC</createdTime>
+<ownerDesignName>erd</ownerDesignName>
+<importedID>DF03A161-0F3F-2177-8B9B-3DE8D103057A</importedID>
+<referredTableLongName>VINO</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>CB3FA541-6007-63D7-2733-134361ED9626</referredTableID>
+<keyObject>544DB212-D8EF-B46B-7264-15EDEE941857</keyObject>
+<referredKeyID>544DB212-D8EF-B46B-7264-15EDEE941857</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

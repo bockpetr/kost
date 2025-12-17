@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Správa vín{% endblock %}
+
+{% block content %}
+<div style="padding: 2rem;">
+    <div class="page-header-row">
+        <h2 class="page-title">
+            Moje vína 
+            {% if active_rocnik %}
+                <small style="color: #666; font-size: 0.6em;">(Ročník {{ active_rocnik.rok }})</small>
+            {% endif %}
+        </h2>
+
+        <a href="/vina/pridat" class="btn"> Nové víno</a>
+    </div>
+
+    
+
+    <div style="background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); overflow: hidden; max-width: 1200px; margin: 0 auto;">
+        <table class="wines-table" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Název vína</th>
+                    <th>Barva</th>
+                    <th>Odrůda</th>
+                    <th>Přívlastek</th>
+                    <th>Sladkost</th>
+                    <th>Rok sklizně</th>
+                    <th style="text-align: right;">Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if wines %}
+                    {% for vino in wines %}
+                    <tr>
+                        <td>{{ vino.nazev }}</td>
+                        <td>{{ vino.barva }}</td>
+                        <td>{{ vino.odruda }}</td>
+                        <td>{{ vino.privlastek }}</td>
+                        <td>{{ vino.sladkost }}</td>
+                        <td>{{ vino.rok_sklizne }}</td>
+                        <td style="text-align: right;">
+                            <a href="/vina/upravit/{{ vino.id }}" class="btn-link">Upravit</a>
+                            <a href="/vina/smazat/{{ vino.id }}" class="btn-danger"
+                                onclick="return confirm('Opravdu chcete smazat víno {{ vino.nazev }}? Tato akce je nevratná.');">
+                                Smazat
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 2rem; color: #666;">
+                            Zatím jste do aktuálního ročníku nepřidali žádná vína.
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
