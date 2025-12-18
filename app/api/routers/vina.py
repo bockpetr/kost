@@ -129,7 +129,7 @@ def upravit_vino_page(
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "upravit_vino.html",
-        {**ctx, "vino": vino} # Posielame objekt 'vino' do šablóny
+        {**ctx, "wine": vino} # Posielame objekt 'vino' do šablóny
     )
 
 # 2. Uloženie zmien

@@ -1,19 +1,36 @@
 {% extends "base.html" %}
 
-{% block title %}Profil vinaře{% endblock %}
+{% block title %}Profil vinaře - {{ vinar.jmeno }}{% endblock %}
 
 {% block content %}
-<div style="max-width: 800px; margin: 0 auto; padding: 20px;">
+<div class="container-md">
     
     <a href="/" class="back-link">&larr; Zpět na seznam</a>
 
-    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); margin-top: 15px;">
-        <h1 style="color: var(--primary); margin-top: 0;">{{ vinar.jmeno }}</h1><br>
-        <p style="font-size: 1.1rem;">
-            <strong>Email:</strong> {{ vinar.email or 'Neuvedeno' }}<br>
-            <strong>Telefon:</strong> {{ vinar.telefon or 'Neuvedeno' }}<br>
-            <strong>Adresa:</strong> {{ vinar.adresa or 'Neuvedeno' }}<br>
-        </p>
+    <div class="card">
+        <div class="card-header detail-header">
+            <h2 class="page-title">{{ vinar.jmeno }}</h2>
+        </div>
+
+        <div class="detail-info-list">
+            
+            <div class="detail-row">
+                <span class="text-muted">Email:</span>
+                <span class="detail-value">{{ vinar.email or 'Neuvedeno' }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="text-muted">Telefon:</span>
+                <span class="detail-value">{{ vinar.telefon or 'Neuvedeno' }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="text-muted">Adresa:</span>
+                <span class="detail-value">{{ vinar.adresa or 'Neuvedeno' }}</span>
+            </div>
+
+        </div>
     </div>
+
 </div>
 {% endblock %}

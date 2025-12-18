@@ -3,65 +3,78 @@
 {% block title %}Upravit víno{% endblock %}
 
 {% block content %}
-<div style="max-width: 600px; margin: 0 auto; padding: 2rem;">
+<div class="container-md">
+    
     <a href="/vina/sprava" class="back-link">&larr; Zpět na správu vín</a>
 
-    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <h2 style="color: var(--primary); margin-top: 0; margin-bottom: 20px;">Úprava vína</h2>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="page-title">Upravit víno</h2>
+        </div>
 
-        <form method="post" action="/vina/upravit/{{ vino.id }}">
+        <form method="post" action="/vina/upravit/{{ wine.id }}">
             
             <div class="form-group">
                 <label for="nazev" class="form-label">Název vína:</label>
-                <input type="text" id="nazev" name="nazev" value="{{ vino.nazev }}" class="form-control" required>
+                <input type="text" id="nazev" name="nazev" class="form-control" 
+                       value="{{ wine.nazev }}" required>
             </div>
 
-            <div class="form-group">
-                <label for="barva" class="form-label">Barva:</label>
-                <select id="barva" name="barva" class="form-control">
-                    <option value="Bílé" {% if vino.barva == 'Bílé' %}selected{% endif %}>Bílé</option>
-                    <option value="Červené" {% if vino.barva == 'Červené' %}selected{% endif %}>Červené</option>
-                    <option value="Růžové" {% if vino.barva == 'Růžové' %}selected{% endif %}>Růžové</option>
-                </select>
-            </div>
-            
             <div class="form-group">
                 <label for="odruda" class="form-label">Odrůda:</label>
-                <input type="text" id="odruda" name="odruda" value="{{ vino.odruda }}" class="form-control">
+                <input type="text" id="odruda" name="odruda" class="form-control" 
+                       value="{{ wine.odruda or '' }}" placeholder="např. Pálava">
             </div>
 
-            <div class="form-group">
-                <label for="privlastek" class="form-label">Přívlastek:</label>
-                <select id="privlastek" name="privlastek" class="form-control">
-                    <option value="" {% if not vino.privlastek %}selected{% endif %}>-- Žádný --</option>
-                    <option value="Zemské víno" {% if vino.privlastek == 'Zemské víno' %}selected{% endif %}>Zemské víno</option>
-                    <option value="Jakostní" {% if vino.privlastek == 'Jakostní' %}selected{% endif %}>Jakostní</option>
-                    <option value="Kabinet" {% if vino.privlastek == 'Kabinet' %}selected{% endif %}>Kabinet</option>
-                    <option value="Pozdní sběr" {% if vino.privlastek == 'Pozdní sběr' %}selected{% endif %}>Pozdní sběr</option>
-                    <option value="Výběr z hroznů" {% if vino.privlastek == 'Výběr z hroznů' %}selected{% endif %}>Výběr z hroznů</option>
-                    <option value="Výběr z bobulí" {% if vino.privlastek == 'Výběr z bobulí' %}selected{% endif %}>Výběr z bobulí</option>
-                    <option value="Ledové" {% if vino.privlastek == 'Ledové' %}selected{% endif %}>Ledové</option>
-                    <option value="Slámové" {% if vino.privlastek == 'Slámové' %}selected{% endif %}>Slámové</option>
-                    <option value="VOC" {% if vino.privlastek == 'VOC' %}selected{% endif %}>VOC</option>
-                </select>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="barva" class="form-label">Barva:</label>
+                    <select id="barva" name="barva" class="form-control">
+                        <option value="Bílé" {% if wine.barva == 'Bílé' %}selected{% endif %}>Bílé</option>
+                        <option value="Červené" {% if wine.barva == 'Červené' %}selected{% endif %}>Červené</option>
+                        <option value="Růžové" {% if wine.barva == 'Růžové' %}selected{% endif %}>Růžové</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="privlastek" class="form-label">Přívlastek:</label>
+                    <select id="privlastek" name="privlastek" class="form-control">
+                        <option value="" {% if not wine.privlastek %}selected{% endif %}>-- Žádný --</option>
+                        <option value="Zemské víno" {% if wine.privlastek == 'Zemské víno' %}selected{% endif %}>Zemské víno</option>
+                        <option value="Jakostní" {% if wine.privlastek == 'Jakostní' %}selected{% endif %}>Jakostní</option>
+                        <option value="Kabinet" {% if wine.privlastek == 'Kabinet' %}selected{% endif %}>Kabinet</option>
+                        <option value="Pozdní sběr" {% if wine.privlastek == 'Pozdní sběr' %}selected{% endif %}>Pozdní sběr</option>
+                        <option value="Výběr z hroznů" {% if wine.privlastek == 'Výběr z hroznů' %}selected{% endif %}>Výběr z hroznů</option>
+                        <option value="Výběr z bobulí" {% if wine.privlastek == 'Výběr z bobulí' %}selected{% endif %}>Výběr z bobulí</option>
+                        <option value="Ledové" {% if wine.privlastek == 'Ledové' %}selected{% endif %}>Ledové</option>
+                        <option value="Slámové" {% if wine.privlastek == 'Slámové' %}selected{% endif %}>Slámové</option>
+                        <option value="VOC" {% if wine.privlastek == 'VOC' %}selected{% endif %}>VOC</option>
+                    </select>
+                </div>                
             </div>
 
-            <div class="form-group">
-                <label for="sladkost" class="form-label">Sladkost:</label>
-                <select id="sladkost" name="sladkost" class="form-control">
-                    <option value="Suché" {% if vino.sladkost == 'Suché' %}selected{% endif %}>Suché</option>
-                    <option value="Polosuché" {% if vino.sladkost == 'Polosuché' %}selected{% endif %}>Polosuché</option>
-                    <option value="Polosladké" {% if vino.sladkost == 'Polosladké' %}selected{% endif %}>Polosladké</option>
-                    <option value="Sladké" {% if vino.sladkost == 'Sladké' %}selected{% endif %}>Sladké</option>
-                </select>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="sladkost" class="form-label">Sladkost:</label>
+                    <select id="sladkost" name="sladkost" class="form-control">
+                        <option value="Suché" {% if wine.sladkost == 'Suché' %}selected{% endif %}>Suché</option>
+                        <option value="Polosuché" {% if wine.sladkost == 'Polosuché' %}selected{% endif %}>Polosuché</option>
+                        <option value="Polosladké" {% if wine.sladkost == 'Polosladké' %}selected{% endif %}>Polosladké</option>
+                        <option value="Sladké" {% if wine.sladkost == 'Sladké' %}selected{% endif %}>Sladké</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="rok_sklizne" class="form-label">Rok sklizně:</label>
+                    <input type="number" id="rok_sklizne" name="rok_sklizne" class="form-control" 
+                           value="{{ wine.rok_sklizne }}" min="1900" max="2100">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="rok_sklizne" class="form-label">Rok sklizně:</label>
-                <input type="number" id="rok_sklizne" name="rok_sklizne" value="{{ vino.rok_sklizne }}" class="form-control" value="2024" min="1900" max="2100">
+            <div class="form-actions">
+                <button type="submit" class="btn btn-full">Uložit změny</button>
             </div>
 
-            <button type="submit" class="btn btn-full">Uložit změny</button>
         </form>
     </div>
 </div>

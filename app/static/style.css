@@ -344,6 +344,40 @@ select.form-control {
     font-weight: bold;
 }
 
+.detail-header {
+    text-align: left;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-header h2 {
+    margin: 0;
+}
+
+.detail-info-list {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f9f9f9;
+    padding: 10px 0;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-value {
+    color: var(--text-dark);
+    font-weight: bold;
+    text-align: right;
+}
+
 @media (max-width: 600px) {
     .form-grid { grid-template-columns: 1fr; }
     .header-top { flex-direction: column; text-align: center; }
