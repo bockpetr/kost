@@ -148,7 +148,6 @@ def upravit_uzivatele_submit(
 
     current_user_login = ctx.get("user")
     
-    # KONTROLA: Edituji sám sebe?
     if user_to_edit.login == current_user_login:
         user_to_edit.is_active = True
         pass

@@ -18,20 +18,17 @@ def manage_vina(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # 1. Zjistit, kdo je přihlášený (podle kontextu z dependencies)
+
     username = ctx.get("user")
     if not username:
         return RedirectResponse("/auth/login", status_code=303)
     
-    # 2. Načíst objekt uživatele z DB, abychom měli jeho ID
     user = get_user_by_login(db, username)
     
-    # 3. Zjistit aktivní ročník (vína spravujeme obvykle pro aktuální ročník)
     active_rocnik = get_aktivni_rocnik(db)
     
     vina = []
     if user and active_rocnik:
-        # 4. Načíst vína tohoto vinaře v daném ročníku
         vina = get_vina_by_vinar(db, active_rocnik.id, user.id)
 
     return ctx["request"].app.state.templates.TemplateResponse(
@@ -48,7 +45,7 @@ def pridat_vino_page(
     request: Request,
     ctx: dict = Depends(get_template_context)
 ):
-    # Kontrola přihlášení
+    
     if not ctx.get("user"):
         return RedirectResponse("/auth/login", status_code=303)
         
@@ -57,7 +54,6 @@ def pridat_vino_page(
         {**ctx}
     )
 
-# 2. Zpracování formuláře (Uložení do DB)
 @router.post("/pridat")
 def pridat_vino_submit(
     request: Request,
@@ -70,23 +66,20 @@ def pridat_vino_submit(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # A. Získat přihlášeného uživatele (potřebujeme jeho ID)
+
     username = ctx.get("user")
     if not username:
         return RedirectResponse("/auth/login", status_code=303)
     
     user = get_user_by_login(db, username)
     
-    # B. Získat aktivní ročník (víno patří do ročníku)
     active_rocnik = get_aktivni_rocnik(db)
     if not active_rocnik:
-        # Pokud není aktivní ročník, nelze přidat víno (ošetření chyby)
         return ctx["request"].app.state.templates.TemplateResponse(
             "pridat_vino.html",
             {**ctx, "error": "Není nastaven žádný aktivní ročník!"}
         )
 
-    # C. Vytvoření objektu Víno
     nove_vino = Vino(
         nazev=nazev,
         odruda=odruda,
@@ -94,16 +87,13 @@ def pridat_vino_submit(
         sladkost=sladkost,
         privlastek=privlastek,
         rok_sklizne=rok_sklizne,
-        vinar_id=user.id,           # ID přihlášeného vinaře
-        rocnik_id=active_rocnik.id  # ID aktuálního ročníku
+        vinar_id=user.id,
+        rocnik_id=active_rocnik.id
     )
     
-    # D. Uložení do databáze
     db.add(nove_vino)
     db.commit()
-    # db.refresh(nove_vino) # Není nutné, pokud hned přesměrováváme
-    
-    # E. Přesměrování zpět na seznam vín
+
     return RedirectResponse("/vina/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.get("/upravit/{vino_id}")
@@ -113,15 +103,12 @@ def upravit_vino_page(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # Kontrola prihlásenia
+
     if not ctx.get("user"):
         return RedirectResponse("/auth/login", status_code=303)
     
-    # Načítanie užívateľa pre kontrolu oprávnení
     user = get_user_by_login(db, ctx["user"])
     
-    # Nájdenie vína v databáze
-    # Hľadáme podľa ID a zároveň kontrolujeme, či patrí prihlásenému vinárovi
     vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
@@ -137,7 +124,7 @@ def upravit_vino_submit(
     vino_id: int,
     request: Request,
     nazev: str = Form(...),
-    odruda: str = Form(...),
+    odruda: str = Form(None),
     barva: str = Form(...),
     sladkost: str = Form(None),
     privlastek: str = Form(None),
