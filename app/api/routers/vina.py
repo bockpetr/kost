@@ -26,12 +26,15 @@ def manage_vina(
     if user and active_rocnik:
         vina = get_vina_by_vinar(db, active_rocnik.id, user.id)
 
+    error_msg = request.query_params.get("error")
+    
     return ctx["request"].app.state.templates.TemplateResponse(
         "sprava_vin.html",
         {
             **ctx, 
             "vina": vina,
-            "active_rocnik": active_rocnik
+            "active_rocnik": active_rocnik,
+            "error": error_msg
         }
     )
 
@@ -39,8 +42,19 @@ def manage_vina(
 def pridat_vino_page(
     request: Request,
     ctx: dict = Depends(get_template_context),
-    user: Users = Depends(get_current_user)
+    user: Users = Depends(get_current_user),
+    db: Session = Depends(get_db)
 ):
+    
+    active_rocnik = get_aktivni_rocnik(db)
+    
+    return ctx["request"].app.state.templates.TemplateResponse(
+        "pridat_vino.html",
+        {
+            **ctx,
+            "error": "Pozor: Není nastaven aktivní ročník, nelze přidávat vína!" if not active_rocnik else None
+        }
+    )
         
     return ctx["request"].app.state.templates.TemplateResponse(
         "pridat_vino.html",
@@ -96,7 +110,10 @@ def upravit_vino_page(
     vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
-        raise HTTPException(status_code=404, detail="Víno neexistuje nebo na jeho úpravu nemáte právo.")
+        return RedirectResponse(
+            "/vina/sprava?error=Víno neexistuje nebo na něj nemáte práva.", 
+            status_code=status.HTTP_303_SEE_OTHER
+        )
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "upravit_vino.html",

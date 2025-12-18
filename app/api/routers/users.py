@@ -18,7 +18,10 @@ def muj_profil_page(
     db: Session = Depends(get_db),
     user: Users = Depends(get_current_user)
 ):
-        
+    """
+    Zobrazí stránku s profilem přihlášeného uživatele.
+    Umožňuje uživateli vidět a editovat své osobní údaje (jméno, email, telefon, heslo).
+    """
     return ctx["request"].app.state.templates.TemplateResponse(
         "profil.html",
         {
@@ -40,7 +43,11 @@ def muj_profil_submit(
     db: Session = Depends(get_db),
     user: Users = Depends(get_current_user)
 ):
-    
+    """
+    Zpracuje formulář pro úpravu vlastního profilu.
+    Aktualizuje údaje uživatele. Pokud je zadáno nové heslo, ověří shodu 
+    s potvrzením a zahashuje ho před uložením.
+    """
     user.jmeno = jmeno
     user.email = email
     user.telefon = telefon
@@ -74,14 +81,20 @@ def sprava_uzivatelu(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-    
+    """
+    Zobrazí administrační přehled všech uživatelů (pouze pro Adminy).
+    Načte seznam všech uživatelů a zobrazí je v tabulce s možností úprav nebo smazání.
+    """
     users = get_all_users(db)
+    
+    error_msg = request.query_params.get("error")
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "sprava_uzivatelu.html",
         {
             **ctx, 
-            "users": users
+            "users": users,
+            "error": error_msg
         }
     )
 
@@ -93,7 +106,10 @@ def upravit_uzivatele_page(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Zobrazí formulář pro editaci cizího uživatele (pouze pro Adminy).
+    Načte data uživatele a seznam všech dostupných rolí pro přiřazení.
+    """
     user_to_edit = get_user_by_id(db, user_id)
     all_roles = get_all_roles(db)
     
@@ -126,7 +142,11 @@ def upravit_uzivatele_submit(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Uloží změny v profilu uživatele provedené administrátorem.
+    Aktualizuje osobní údaje, stav aktivity a role.
+    Admin si nemůže změnit roli.
+    """
     user_to_edit = get_user_by_id(db, user_id)
     if not user_to_edit:
         raise HTTPException(status_code=404, detail="Uživatel nenalezen")
@@ -158,7 +178,9 @@ def pridat_uzivatele_page(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Zobrazí formulář pro ruční vytvoření nového uživatele administrátorem.
+    """
     all_roles = get_all_roles(db)
 
     return ctx["request"].app.state.templates.TemplateResponse(
@@ -180,7 +202,11 @@ def pridat_uzivatele_submit(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Vytvoří nového uživatele.
+    Nejprve ověří, zda login už neexistuje. Pokud je vše v pořádku, vytvoří uživatele,
+    zahashuje heslo a přiřadí vybrané role.
+    """
     if get_user_by_login(db, login):
         all_roles = get_all_roles(db)
         return ctx["request"].app.state.templates.TemplateResponse(
@@ -221,14 +247,17 @@ def smazat_uzivatele(
     admin_check: dict = Depends(require_admin),
     user: Users = Depends(get_current_user)
 ):
-    
+    """
+    Smaže uživatele z databáze.
+    Admin nemůže smazat sám sebe.
+    Díky nastavení v db.py se smazáním uživatele automaticky smažou i jeho vína a hodnocení.
+    """
     user_to_delete = get_user_by_id(db, user_id)
     
     if not user_to_delete:
         return RedirectResponse("/users/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
     if user.id == user_to_delete.id:
-        users = get_all_users(db)
         return RedirectResponse(
             "/users/sprava?error=Nemůžete smazat svůj vlastní účet!",
             status_code=status.HTTP_303_SEE_OTHER

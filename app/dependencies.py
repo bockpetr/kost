@@ -16,17 +16,8 @@ def get_current_user_data(
 ) -> Dict[str, Any]:
     """
     Získá základní data o přihlášeném uživateli z JWT tokenu v cookies.
-    
-    Tato funkce neblokuje přístup, pokud uživatel není přihlášen 
-    (vrátí None v datech), což je vhodné pro veřejné stránky.
-
-    Args:
-        request: HTTP požadavek.
-        access_token: JWT token získaný z cookie 'access_token'.
-        db: Databázová relace.
-
-    Returns:
-        Dict: Slovník obsahující klíče 'user' (login) a 'roles' (seznam rolí).
+    Pokud je uživatel přihlášen vrací jeho login a role.
+    Pokud není uživatel přihlášen vrací prázdná data.
     """
     user_info = {
         "user": None,
@@ -56,18 +47,13 @@ def get_template_context(
     db: Session = Depends(get_db)
 ) -> Dict[str, Any]:
     """
-    Připraví kontextová data, která jsou potřebná pro vykreslení šablon (Jinja2).
-    
-    Zahrnuje informace o aktuálním uživateli a ročnících, které se zobrazují
-    v menu nebo hlavičce na každé stránce.
-
-    Args:
-        request: HTTP požadavek (nutný pro url_for v šablonách).
-        user_data: Data uživatele z funkce get_current_user_data.
-        db: Databázová relace.
-
-    Returns:
-        Dict: Kontext pro šablonu.
+    Připraví globální data (kontext) pro šablony Jinja2.
+    Tato funkce se volá na téměř každé stránce. Zajišťuje, že šablona 'base.html'
+    má vždy přístup k:
+    1. Objektu Request (nutný pro generování URL).
+    2. Informacím o uživateli.
+    3. Seznamu ročníků (pro vykreslení navigačního menu).
+    4. Informaci o tom, který ročník je právě aktivní.
     """
     return {
         "request": request,
@@ -79,18 +65,9 @@ def get_template_context(
 
 def require_admin(user_data: dict = Depends(get_current_user_data)) -> dict:
     """
-    Závislost, která vyžaduje, aby měl přihlášený uživatel roli 'Admin'.
-    
-    Pokud uživatel není admin, vyvolá výjimku 403 Forbidden.
-
-    Args:
-        user_data: Data uživatele.
-
-    Raises:
-        HTTPException: Pokud uživatel nemá roli Admin.
-
-    Returns:
-        dict: Data uživatele (pokud je admin).
+    Bezpečnostní závislost pro ochranu administrátorských sekcí.
+    Zkontroluje, zda má aktuální uživatel roli 'Admin'.
+    Pokud ne, okamžitě ukončí požadavek chybou 403 Forbidden.
     """
     if "Admin" not in user_data["roles"]:
         raise HTTPException(status_code=403, detail="Přístup odepřen")
@@ -101,20 +78,10 @@ def get_current_user(
     db: Session = Depends(get_db)
 ) -> Users:
     """
-    Získá plný ORM objekt aktuálně přihlášeného uživatele z databáze.
-    
-    Na rozdíl od get_current_user_data tato funkce VYŽADUJE přihlášení.
-    Pokud uživatel není přihlášen nebo neexistuje, přesměruje na login.
-
-    Args:
-        user_data: Data z tokenu.
-        db: Databázová relace.
-
-    Raises:
-        HTTPException: Přesměrování (303) na /auth/login, pokud autentizace selže.
-
-    Returns:
-        Users: Databázový objekt uživatele.
+    Získá plný databázový objekt aktuálně přihlášeného uživatele.
+    Pokud uživatel není přihlášen (token je neplatný nebo vypršel), 
+    automaticky ho přesměruje na přihlašovací stránku (/auth/login).
+    Nutné pro kontrolu přístupu do neveřejných sekcí.
     """
     username = user_data.get("user")
     
