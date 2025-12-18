@@ -1,70 +1,57 @@
 {% extends "base.html" %}
 
-{% block title %}Můj profil{% endblock %}
+{% block title %}Můj profil - {{ profil_user.jmeno }}{% endblock %}
 
 {% block content %}
-<div style="max-width: 600px; margin: 0 auto; padding: 2rem;">
-    
-    <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-        <h2 style="color: var(--primary); margin-top: 0; margin-bottom: 20px;">Můj profil</h2>
+<div class="container-md">
+    <a href="/" class="back-link">&larr; Zpět na úvod</a>
 
-        {% if error %}
-            <div style="background: #f8d7da; color: #721c24; padding: 10px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #f5c6cb;">
-                ⚠️ {{ error }}
-            </div>
-        {% endif %}
-
+    <div class="card">
+        <h2 class="card-header">Můj profil: {{ profil_user.jmeno }}</h2>
+            
         <form method="post" action="/users/profil">
             
-            <div style="margin-bottom: 15px;">
-                <label style="font-weight: bold; display: block; margin-bottom: 5px;">Přihlašovací jméno:</label>
-                <input type="text" value="{{ profil_user.login }}" disabled 
-                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; color: #666; cursor: not-allowed;">
-                <small style="color: #999;">Login nelze změnit.</small>
+            <div class="form-group">
+                <label for="jmeno" class="form-label">Jméno a příjmení:</label>
+                <input type="text" id="jmeno" name="jmeno" value="{{ profil_user.jmeno }}" class="form-control" required>
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label for="jmeno" style="font-weight: bold; display: block; margin-bottom: 5px;">Jméno a příjmení:</label>
-                <input type="text" id="jmeno" name="jmeno" value="{{ profil_user.jmeno }}" required 
-                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <div class="form-group">
+                <label for="adresa" class="form-label">Adresa:</label>
+                <input type="text" id="adresa" name="adresa" value="{{ profil_user.adresa or '' }}" class="form-control">
             </div>
 
-            <div style="margin-bottom: 15px;">
-                <label for="email" style="font-weight: bold; display: block; margin-bottom: 5px;">Email:</label>
-                <input type="email" id="email" name="email" value="{{ profil_user.email }}" required 
-                       style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                <div>
-                    <label for="telefon" style="font-weight: bold; display: block; margin-bottom: 5px;">Telefon:</label>
-                    <input type="text" id="telefon" name="telefon" value="{{ profil_user.telefon or '' }}" 
-                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="telefon" class="form-label">Telefon:</label>
+                    <input type="text" id="telefon" name="telefon" value="{{ profil_user.telefon or '' }}" class="form-control">
                 </div>
-                <div>
-                    <label for="adresa" style="font-weight: bold; display: block; margin-bottom: 5px;">Adresa:</label>
-                    <input type="text" id="adresa" name="adresa" value="{{ profil_user.adresa or '' }}" 
-                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" id="email" name="email" value="{{ profil_user.email }}" class="form-control" required>
                 </div>
             </div>
 
-            <div style="border-top: 1px solid #eee; padding-top: 20px; margin-top: 20px;">
-                <h4 style="margin-bottom: 15px; color: #555;">Změna hesla <small style="font-weight: normal; font-size: 0.8em;">(vyplňte jen pokud chcete změnit)</small></h4>
-                
-                <div style="margin-bottom: 15px;">
-                    <label for="new_password" style="font-weight: bold; display: block; margin-bottom: 5px;">Nové heslo:</label>
-                    <input type="password" id="new_password" name="new_password" 
-                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
+            <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
 
-                <div style="margin-bottom: 20px;">
-                    <label for="password_confirm" style="font-weight: bold; display: block; margin-bottom: 5px;">Potvrzení hesla:</label>
-                    <input type="password" id="password_confirm" name="password_confirm" 
-                           style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
+            <h3 class="card-title">Změna hesla</h3>
+            <p class="text-muted" style="margin-bottom: 15px;">Vyplňte pouze v případě, že chcete heslo změnit.</p>
+            
+            <div class="form-group">
+                    <label for="new_password" class="form-label">Nové heslo:</label>
+                    <input type="password" id="new_password" name="new_password" class="form-control">
             </div>
 
-            <button type="submit" class="btn btn-full">Uložit změny</button>
+            <div class="form-group">
+                <label for="password_confirm" class="form-label">Potvrzení hesla:</label>
+                <input type="password" id="password_confirm" name="password_confirm" class="form-control">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-full">Uložit změny</button>
+            </div>
+
         </form>
     </div>
 </div>

@@ -7,13 +7,13 @@ from app.core.database import get_db
 from app.dependencies import get_template_context
 from app.repositories.users import get_user_by_login
 from app.repositories.rocniky import get_aktivni_rocnik
-from app.repositories.vina import get_wines_by_vinar
+from app.repositories.vina import get_vina_by_vinar
 from app.models.db import Vino, Hodnoceni, Users
 
 router = APIRouter()
 
 @router.get("/sprava")
-def manage_wines(
+def manage_vina(
     request: Request,
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
@@ -29,16 +29,16 @@ def manage_wines(
     # 3. Zjistit aktivní ročník (vína spravujeme obvykle pro aktuální ročník)
     active_rocnik = get_aktivni_rocnik(db)
     
-    wines = []
+    vina = []
     if user and active_rocnik:
         # 4. Načíst vína tohoto vinaře v daném ročníku
-        wines = get_wines_by_vinar(db, active_rocnik.id, user.id)
+        vina = get_vina_by_vinar(db, active_rocnik.id, user.id)
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "sprava_vin.html",
         {
             **ctx, 
-            "wines": wines,
+            "vina": vina,
             "active_rocnik": active_rocnik
         }
     )
@@ -106,9 +106,9 @@ def pridat_vino_submit(
     # E. Přesměrování zpět na seznam vín
     return RedirectResponse("/vina/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
-@router.get("/upravit/{wine_id}")
+@router.get("/upravit/{vino_id}")
 def upravit_vino_page(
-    wine_id: int,
+    vino_id: int,
     request: Request,
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
@@ -122,22 +122,21 @@ def upravit_vino_page(
     
     # Nájdenie vína v databáze
     # Hľadáme podľa ID a zároveň kontrolujeme, či patrí prihlásenému vinárovi
-    vino = db.query(Vino).filter(Vino.id == wine_id, Vino.vinar_id == user.id).first()
+    vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
         raise HTTPException(status_code=404, detail="Víno sa nenašlo alebo na jeho úpravu nemáte právo.")
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "upravit_vino.html",
-        {**ctx, "wine": vino} # Posielame objekt 'vino' do šablóny
+        {**ctx, "vino": vino}
     )
 
-# 2. Uloženie zmien
-@router.post("/upravit/{wine_id}")
+@router.post("/upravit/{vino_id}")
 def upravit_vino_submit(
-    wine_id: int,
+    vino_id: int,
     request: Request,
-    nazev: str = Form(...),      # Užívateľ zadáva názov ručne
+    nazev: str = Form(...),
     odruda: str = Form(...),
     barva: str = Form(...),
     sladkost: str = Form(None),
@@ -152,13 +151,11 @@ def upravit_vino_submit(
         
     user = get_user_by_login(db, username)
     
-    # Opäť nájdeme víno a skontrolujeme vlastníka
-    vino = db.query(Vino).filter(Vino.id == wine_id, Vino.vinar_id == user.id).first()
+    vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
         raise HTTPException(status_code=404, detail="Víno neexistuje.")
 
-    # Aktualizácia atribútov
     vino.nazev = nazev
     vino.odruda = odruda
     vino.barva = barva
@@ -166,36 +163,31 @@ def upravit_vino_submit(
     vino.privlastek = privlastek
     vino.rok_sklizne = rok_sklizne
     
-    db.commit() # Uloženie zmien do DB
+    db.commit()
     
     return RedirectResponse("/vina/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
-@router.get("/smazat/{wine_id}")
+@router.get("/smazat/{vino_id}")
 def smazat_vino(
-    wine_id: int,
+    vino_id: int,
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # 1. Kontrola přihlášení
+
     username = ctx.get("user")
     if not username:
         return RedirectResponse("/auth/login", status_code=303)
     
     user = get_user_by_login(db, username)
     
-    # 2. Vyhledání vína + Kontrola vlastníka
-    # Hledáme víno, které má dané ID a zároveň patří přihlášenému vinaři (vinar_id == user.id)
-    vino = db.query(Vino).filter(Vino.id == wine_id, Vino.vinar_id == user.id).first()
+    vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
-        # Pokud víno neexistuje nebo patří někomu jinému
         raise HTTPException(status_code=404, detail="Víno nenalezeno nebo nemáte oprávnění jej smazat.")
         
-    # 3. Smazání z databáze
     db.delete(vino)
     db.commit()
     
-    # 4. Přesměrování zpět na seznam
     return RedirectResponse("/vina/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
 @router.get("/hodnoceni")
@@ -204,7 +196,7 @@ def hodnoceni_page(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # 1. Kontrola přihlášení
+    
     username = ctx.get("user")
     if not username:
         return RedirectResponse("/auth/login", status_code=303)
@@ -214,36 +206,33 @@ def hodnoceni_page(
     
     if not active_rocnik:
          return ctx["request"].app.state.templates.TemplateResponse(
-            "hodnoceni.html", {**ctx, "error": "Není aktivní ročník.", "wines_data": []}
+            "hodnoceni.html", {**ctx, "error": "Není aktivní ročník.", "vina_data": []}
         )
 
-    # 2. Příprava dotazu
-    # Chceme získat seznam cizích vín a k nim připojit hodnocení PŘIHLÁŠENÉHO uživatele (pokud existuje)
     MojeHodnoceni = aliased(Hodnoceni)
 
     results = (
         db.query(Vino, MojeHodnoceni)
-        .join(Vino.vinar) # Abychom měli jméno vinaře
+        .join(Vino.vinar)
         .outerjoin(MojeHodnoceni, (MojeHodnoceni.vino_id == Vino.id) & (MojeHodnoceni.hodnotitel_id == user.id))
         .filter(Vino.rocnik_id == active_rocnik.id)
-        .filter(Vino.vinar_id != user.id) # Filtr: Nezobrazovat vlastní vína
+        .filter(Vino.vinar_id != user.id)
         .order_by(Vino.nazev)
         .all()
     )
     
-    # 3. Transformace dat pro šablonu
-    wines_data = []
+    vina_data = []
     for vino, hodnoceni in results:
-        wines_data.append({
+        vina_data.append({
             "vino": vino,
-            "hodnoceni": hodnoceni # Objekt Hodnoceni nebo None
+            "hodnoceni": hodnoceni
         })
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "hodnoceni.html",
         {
             **ctx, 
-            "wines_data": wines_data
+            "vina_data": vina_data
         }
     )
 
@@ -254,46 +243,36 @@ async def hodnoceni_submit(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    # 1. Kontrola přihlášení
+
     username = ctx.get("user")
     if not username:
         return RedirectResponse("/auth/login", status_code=303)
     
     user = get_user_by_login(db, username)
     
-    # 2. Načtení všech dat z formuláře (raw data)
     form_data = await request.form()
     
-    # 3. Iterace přes odeslaná data
-    # Hledáme klíče ve formátu "body_{ID_VINA}", což nám identifikuje řádek tabulky
     for key, value in form_data.items():
         if key.startswith("body_"):
             try:
-                # Získání ID vína a zadané hodnoty
-                wine_id = int(key.split("_")[1])
+                vino_id = int(key.split("_")[1])
                 raw_body = value.strip()
                 
-                # Načtení poznámky ke stejnému vínu
-                poznamka_key = f"poznamka_{wine_id}"
+                poznamka_key = f"poznamka_{vino_id}"
                 poznamka_val = form_data.get(poznamka_key, "").strip()
 
-                # Bezpečnostní kontrola: Opravdu víno nepatří hodnotiteli?
-                vino_db = db.query(Vino).filter(Vino.id == wine_id).first()
+                vino_db = db.query(Vino).filter(Vino.id == vino_id).first()
                 if not vino_db or vino_db.vinar_id == user.id:
                     continue
 
-                # Hledání existujícího záznamu hodnocení v DB
                 hodnoceni = db.query(Hodnoceni).filter(
-                    Hodnoceni.vino_id == wine_id,
+                    Hodnoceni.vino_id == vino_id,
                     Hodnoceni.hodnotitel_id == user.id
                 ).first()
 
-                # --- Logika ukládání ---
                 if raw_body:
-                    # A) Uživatel zadal body -> Uložit nebo Aktualizovat
                     body_val = int(raw_body)
                     
-                    # Ošetření rozsahu bodů (volitelné, HTML input to sice hlídá, ale backend je jistota)
                     if body_val < 0: body_val = 0
                     if body_val > 100: body_val = 100
 
@@ -304,22 +283,17 @@ async def hodnoceni_submit(
                         nove_hodnoceni = Hodnoceni(
                             body=body_val,
                             poznamka=poznamka_val,
-                            vino_id=wine_id,
+                            vino_id=vino_id,
                             hodnotitel_id=user.id
                         )
                         db.add(nove_hodnoceni)
                 else:
-                    # B) Políčko s body je prázdné -> Smazat hodnocení (pokud existovalo)
-                    # To znamená, že uživatel hodnocení "vymazal"
                     if hodnoceni:
                         db.delete(hodnoceni)
                         
             except ValueError:
-                # Pokud hodnota není číslo, přeskočíme
                 continue
 
-    # 4. Potvrzení všech změn najednou
     db.commit()
     
-    # 5. Přesměrování zpět na tabulku
     return RedirectResponse("/vina/hodnoceni", status_code=status.HTTP_303_SEE_OTHER)

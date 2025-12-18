@@ -8,7 +8,7 @@ from app.core.database import get_db
 from app.dependencies import get_template_context
 
 from app.repositories.rocniky import get_nejnovejsi_rocnik, get_rocnik_by_id
-from app.repositories.vina import get_wines_by_rocnik, get_wine_detail
+from app.repositories.vina import get_vina_by_rocnik, get_vino_detail
 from app.repositories.users import get_public_user_detail
 
 router = APIRouter()
@@ -34,14 +34,14 @@ def home_page(
     if not selected_rocnik:
         selected_rocnik = zobrazeny_rocnik
     
-    wines = []
+    vina = []
     rocnik_nazev = "V databázi nejsou žádné ročníky"
 
     if selected_rocnik:
         rocnik_nazev = f"Ročník {selected_rocnik.rok}"
         if not selected_rocnik.is_active:
             rocnik_nazev += " (Archiv)"
-        wines = get_wines_by_rocnik(db, selected_rocnik.id)
+        vina = get_vina_by_rocnik(db, selected_rocnik.id)
 
     # DŮLEŽITÉ: Do šablony rozbalíme kontext (**ctx)
     # Tím se do šablony dostane 'user', 'all_rocniky', atd., které potřebuje base.html
@@ -51,25 +51,25 @@ def home_page(
             **ctx,  # <--- Tady je to kouzlo. Přidá user, roles, all_rocniky...
             "active_rocnik": zobrazeny_rocnik, 
             "rocnik_nazev": rocnik_nazev,
-            "wines": wines
+            "vina": vina
         }
     )
 
 # Stejně upravíme i další endpointy, které vrací HTML:
 
-@router.get("/vino/{wine_id}")
-def wine_detail(
-    wine_id: int,
+@router.get("/vino/{vino_id}")
+def vino_detail(
+    vino_id: int,
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    wine, ratings = get_wine_detail(db, wine_id)
-    if not wine:
+    vino, ratings = get_vino_detail(db, vino_id)
+    if not vino:
         raise HTTPException(status_code=404, detail="Víno nenalezeno")
         
     return ctx["request"].app.state.templates.TemplateResponse(
         "detail_vino.html", 
-        {**ctx, "wine": wine, "ratings": ratings} # Rozbalit ctx
+        {**ctx, "vino": vino, "ratings": ratings} # Rozbalit ctx
     )
     
 @router.get("/vinar/{vinar_id}")
