@@ -1,5 +1,5 @@
 from datetime import datetime
-from fastapi import APIRouter, Request, Depends, status, HTTPException, Form
+from fastapi import APIRouter, Request, Depends, status
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 
@@ -23,7 +23,7 @@ def sprava_rocniku(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """Zobrazí stránku pro správu ročníků."""
     rocniky = get_vsechny_rocniky(db)
 
     return ctx["request"].app.state.templates.TemplateResponse(
@@ -40,7 +40,7 @@ def pridat_rocnik(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """Vytvoří nový ročník (automaticky rok + 1)."""
     nejnovejsi = get_nejnovejsi_rocnik(db)
     if nejnovejsi:
         novy_rok_cislo = nejnovejsi.rok + 1
@@ -61,10 +61,13 @@ def aktivovat_rocnik(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Aktivuje ročník.
+    Je možné aktivovat pouze NEJNOVĚJŠÍ ročník.
+    """
     nejnovejsi = get_nejnovejsi_rocnik(db)
     
-    if nejnovejsi and nejnovejsi.id == rocnik_id:
+    if nejnovejsi and (nejnovejsi.id == rocnik_id):
         set_active_rocnik_logic(db, rocnik_id)
     
     return RedirectResponse("/rocniky/sprava", status_code=status.HTTP_303_SEE_OTHER)
@@ -76,7 +79,9 @@ def deaktivovat_rocnik(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Deaktivuje ročník.
+    """
     deactivate_rocnik_logic(db, rocnik_id)
     
     return RedirectResponse("/rocniky/sprava", status_code=status.HTTP_303_SEE_OTHER)
@@ -88,7 +93,10 @@ def smazat_rocnik(
     db: Session = Depends(get_db),
     admin_check: dict = Depends(require_admin)
 ):
-
+    """
+    Smaže ročník i se všecmi víny a jejich hodnocením v daném ročníku
+    díky parametrům cascade="all, delete-orphan" v db.py
+    """
     rocnik = get_rocnik_by_id(db, rocnik_id)
     
     if rocnik:

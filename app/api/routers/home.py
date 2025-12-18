@@ -16,15 +16,18 @@ def home_page(
     rocnik_id: Optional[int] = None, 
     db: Session = Depends(get_db)
 ):
+    """
+    Zobrazí úvodní stránku se seznamem vín.
     
-    zobrazeny_rocnik = get_nejnovejsi_rocnik(db)
+    Pokud není specifikován 'rocnik_id', zobrazí se vína z nejnovějšího ročníku.
+    """
     selected_rocnik = None
 
     if rocnik_id:
         selected_rocnik = get_rocnik_by_id(db, rocnik_id)
     
     if not selected_rocnik:
-        selected_rocnik = zobrazeny_rocnik
+        selected_rocnik = get_nejnovejsi_rocnik(db)
     
     vina = []
     rocnik_nazev = "V databázi nejsou žádné ročníky"
@@ -39,7 +42,7 @@ def home_page(
         "index.html",
         {
             **ctx,
-            "active_rocnik": zobrazeny_rocnik, 
+            "active_rocnik": selected_rocnik, 
             "rocnik_nazev": rocnik_nazev,
             "vina": vina
         }
@@ -51,13 +54,16 @@ def vino_detail(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-    vino, ratings = get_vino_detail(db, vino_id)
+    """
+    Zobrazí detail konkrétního vína včetně hodnocení.
+    """
+    vino, hodnoceni = get_vino_detail(db, vino_id)
     if not vino:
         raise HTTPException(status_code=404, detail="Víno nenalezeno")
         
     return ctx["request"].app.state.templates.TemplateResponse(
         "detail_vino.html", 
-        {**ctx, "vino": vino, "ratings": ratings}
+        {**ctx, "vino": vino, "hodnoceni": hodnoceni}
     )
     
 @router.get("/vinar/{vinar_id}")
@@ -66,7 +72,9 @@ def vinar_detail(
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db)
 ):
-
+    """
+    Zobrazí veřejný profil vinaře a jeho vína.
+    """
     vinar = get_public_user_detail(db, vinar_id)
     
     if not vinar:

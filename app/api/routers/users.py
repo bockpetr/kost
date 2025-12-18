@@ -229,13 +229,9 @@ def smazat_uzivatele(
 
     if user.id == user_to_delete.id:
         users = get_all_users(db)
-        return ctx["request"].app.state.templates.TemplateResponse(
-            "sprava_uzivatelu.html",
-            {
-                **ctx, 
-                "users": users, 
-                "error": "Nemůžete smazat svůj vlastní účet!"
-            }
+        return RedirectResponse(
+            "/users/sprava?error=Nemůžete smazat svůj vlastní účet!",
+            status_code=status.HTTP_303_SEE_OTHER
         )
 
     db.delete(user_to_delete)

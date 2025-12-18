@@ -19,7 +19,8 @@ class Users(Base):
     email = Column(String(100), nullable=False)
     
     role = relationship("Role", secondary="USERROLE", backref="users")
-    vina = relationship("Vino", back_populates="vinar")
+    vina = relationship("Vino", back_populates="vinar", cascade="all, delete-orphan")
+    hodnoceni = relationship("Hodnoceni", back_populates="hodnotitel", cascade="all, delete-orphan")
 
 class UserRole(Base):
     __tablename__ = "USERROLE"
@@ -62,4 +63,4 @@ class Hodnoceni(Base):
     hodnotitel_id = Column(Integer, ForeignKey("USERS.id"), nullable=False)
     
     vino = relationship("Vino", back_populates="hodnoceni")
-    hodnotitel = relationship("Users")
+    hodnotitel = relationship("Users", back_populates="hodnoceni")
