@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session, aliased
 from typing import Optional
 
 from app.core.database import get_db
-from app.dependencies import get_template_context
+from app.dependencies import get_template_context, get_current_user
 from app.repositories.users import get_user_by_login
 from app.repositories.rocniky import get_aktivni_rocnik
 from app.repositories.vina import get_vina_by_vinar
@@ -16,14 +16,9 @@ router = APIRouter()
 def manage_vina(
     request: Request,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     
     active_rocnik = get_aktivni_rocnik(db)
     
@@ -43,11 +38,9 @@ def manage_vina(
 @router.get("/pridat")
 def pridat_vino_page(
     request: Request,
-    ctx: dict = Depends(get_template_context)
+    ctx: dict = Depends(get_template_context),
+    user: Users = Depends(get_current_user)
 ):
-    
-    if not ctx.get("user"):
-        return RedirectResponse("/auth/login", status_code=303)
         
     return ctx["request"].app.state.templates.TemplateResponse(
         "pridat_vino.html",
@@ -64,14 +57,9 @@ def pridat_vino_submit(
     privlastek: str = Form(None),
     rok_sklizne: int = Form(...),
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     
     active_rocnik = get_aktivni_rocnik(db)
     if not active_rocnik:
@@ -101,18 +89,14 @@ def upravit_vino_page(
     vino_id: int,
     request: Request,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    if not ctx.get("user"):
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, ctx["user"])
     
     vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
     if not vino:
-        raise HTTPException(status_code=404, detail="Víno sa nenašlo alebo na jeho úpravu nemáte právo.")
+        raise HTTPException(status_code=404, detail="Víno neexistuje nebo na jeho úpravu nemáte právo.")
 
     return ctx["request"].app.state.templates.TemplateResponse(
         "upravit_vino.html",
@@ -130,13 +114,9 @@ def upravit_vino_submit(
     privlastek: str = Form(None),
     rok_sklizne: int = Form(...),
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-        
-    user = get_user_by_login(db, username)
     
     vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
@@ -158,14 +138,9 @@ def upravit_vino_submit(
 def smazat_vino(
     vino_id: int,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     
     vino = db.query(Vino).filter(Vino.id == vino_id, Vino.vinar_id == user.id).first()
     
@@ -181,14 +156,10 @@ def smazat_vino(
 def hodnoceni_page(
     request: Request,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
     
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     active_rocnik = get_aktivni_rocnik(db)
     
     if not active_rocnik:
@@ -228,14 +199,9 @@ def hodnoceni_page(
 async def hodnoceni_submit(
     request: Request,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     
     form_data = await request.form()
     

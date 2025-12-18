@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 from app.core.database import get_db
-from app.dependencies import get_template_context, require_admin
+from app.dependencies import get_template_context, require_admin, get_current_user
 from app.repositories.users import get_all_users, get_user_by_id, get_all_roles, get_user_by_login
 from app.models.db import Role, Users
 from app.core.security import get_password_hash
@@ -15,15 +15,10 @@ router = APIRouter()
 def muj_profil_page(
     request: Request,
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
-    
+        
     return ctx["request"].app.state.templates.TemplateResponse(
         "profil.html",
         {
@@ -42,14 +37,9 @@ def muj_profil_submit(
     new_password: str = Form(None),
     password_confirm: str = Form(None),
     ctx: dict = Depends(get_template_context),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user: Users = Depends(get_current_user)
 ):
-
-    username = ctx.get("user")
-    if not username:
-        return RedirectResponse("/auth/login", status_code=303)
-    
-    user = get_user_by_login(db, username)
     
     user.jmeno = jmeno
     user.email = email
@@ -228,21 +218,19 @@ def smazat_uzivatele(
     user_id: int,
     ctx: dict = Depends(get_template_context),
     db: Session = Depends(get_db),
-    admin_check: dict = Depends(require_admin)
+    admin_check: dict = Depends(require_admin),
+    user: Users = Depends(get_current_user)
 ):
-
-    current_user_login = ctx.get("user")
-    current_user = get_user_by_login(db, current_user_login)
     
     user_to_delete = get_user_by_id(db, user_id)
     
     if not user_to_delete:
         return RedirectResponse("/users/sprava", status_code=status.HTTP_303_SEE_OTHER)
 
-    if current_user.id == user_to_delete.id:
+    if user.id == user_to_delete.id:
         users = get_all_users(db)
         return ctx["request"].app.state.templates.TemplateResponse(
-            "sprava_uzivatele.html",
+            "sprava_uzivatelu.html",
             {
                 **ctx, 
                 "users": users, 
