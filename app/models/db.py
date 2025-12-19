@@ -6,6 +6,8 @@ class Role(Base):
     __tablename__ = "ROLE"
     id = Column(Integer, primary_key=True, index=True)
     nazev = Column(String(50), nullable=False)
+    
+    users = relationship("Users", secondary="USERROLE", back_populates="role")
 
 class Users(Base):
     __tablename__ = "USERS"

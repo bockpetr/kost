@@ -18,7 +18,7 @@ def get_vina_by_rocnik(
             func.avg(Hodnoceni.body).label("prumer_body"),
             func.count(Hodnoceni.id).label("pocet_hodnoceni")
         )
-        .outerjoin(Vino.Hodnoceni)
+        .outerjoin(Vino.hodnoceni)
         .options(joinedload(Vino.vinar))
         .filter(Vino.rocnik_id == rocnik_id)
         .group_by(Vino.id)

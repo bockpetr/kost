@@ -4,26 +4,25 @@
 
 {% block content %}
 <div class="container-lg">
-    
-    {% if not vina_data %}
-        <div class="page-header-row">
-            <h2 class="page-title">Hodnocení vín ({{ active_rocnik.rok }})</h2>
-        </div>
+    <div class="page-header-row">
+        <h2 class="page-title">
+            Hodnocení vín {% if active_rocnik %}({{ active_rocnik.rok }}){% endif %}
+        </h2>
+        {% if vina_data %}
+            <button type="submit" form="rating-form" class="btn">Uložit hodnocení</button>
+        {% endif %}
+    </div>
 
-        <div class="card" style="text-align: center; padding: 3rem;">
-            <p style="font-size: 1.1rem; color: #666; margin: 0;">
+    {% if not vina_data %}
+        <div class="card text-center" style="padding: 3rem;">
+            <p class="text-muted" style="font-size: 1.1rem; margin: 0;">
                 V tomto ročníku zatím nejsou žádná cizí vína k hodnocení.
             </p>
         </div>
     {% else %}
         
-        <form method="post" action="/vina/hodnoceni">
+        <form id="rating-form" method="post" action="/vina/hodnoceni">
             
-            <div class="page-header-row">
-                <h2 class="page-title">Hodnocení vín ({{ active_rocnik.rok }})</h2>
-                <button type="submit" class="btn">Uložit hodnocení</button>
-            </div>
-
             <div class="card" style="padding: 0; overflow-x: auto;">
                 <table class="data-table">
                     <thead>
@@ -42,37 +41,32 @@
                     <tbody>
                         {% for item in vina_data %}
                         <tr>
-                            <td style="font-weight: bold;">
-                                <a href="/vino/{{ item.vino.id }}" target="_blank" class="link-wine" title="Otevřít detail">
+                            <td class="text-bold">
+                                <a href="/vino/{{ item.vino.id }}" target="_blank" title="Otevřít detail">
                                     {{ item.vino.nazev }}
                                 </a>
                             </td>
                             
                             <td>
-                                <a href="/vinar/{{ item.vino.vinar.id }}" target="_blank" class="link-vinar">
+                                <a href="/vinar/{{ item.vino.vinar.id }}" target="_blank">
                                     {{ item.vino.vinar.jmeno }}
                                 </a>
                             </td>
 
                             <td>{{ item.vino.barva or '-' }}</td>
-                            
                             <td>{{ item.vino.odruda or '-' }}</td>
-
                             <td>{{ item.vino.privlastek or '-' }}</td>
-
                             <td>{{ item.vino.sladkost or '-' }}</td>
-                            
                             <td>{{ item.vino.rok_sklizne or '-' }}</td>
 
-                            <td style="text-align: center;">
+                            <td class="text-center">
                                 <input type="number" 
                                        name="body_{{ item.vino.id }}" 
                                        min="0" max="100"
-                                       step="0.1"
                                        value="{{ item.hodnoceni.body if item.hodnoceni else '' }}"
-                                       class="form-control"
+                                       class="form-control text-center text-bold"
                                        placeholder="-"
-                                       style="width: 80px; text-align: center; display: inline-block; padding: 5px; font-weight: bold; color: var(--primary);">
+                                       style="width: 80px; color: var(--primary);">
                             </td>
                             
                             <td>
@@ -80,8 +74,7 @@
                                        name="poznamka_{{ item.vino.id }}" 
                                        placeholder="Vaše poznámka..."
                                        value="{{ item.hodnoceni.poznamka if item.hodnoceni and item.hodnoceni.poznamka else '' }}"
-                                       class="form-control"
-                                       style="width: 100%; padding: 5px;">
+                                       class="form-control">
                             </td>
                         </tr>
                         {% endfor %}
@@ -89,7 +82,7 @@
                 </table>
             </div>
             
-            <div style="text-align: right; margin-top: 20px;">
+            <div class="form-actions text-right">
                 <button type="submit" class="btn">Uložit hodnocení</button>
             </div>
 

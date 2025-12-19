@@ -1,11 +1,17 @@
 /* #region 1. PROMĚNNÉ A KONFIGURACE */
 :root {
     --primary: #722F37; /* Vínová */
-    --secondary: #a37f38; /* Zlatá */
+    /* Změna: Tmavší odstín zlaté pro splnění kontrastu WCAG AA */
+    --secondary: #a37f38; 
     --bg-light: #f9f7f2; /* Krémová */
     --text-dark: #333;
     --white: #ffffff;
     --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    
+    /* Barvy pro stavy (Alerts/Badges) */
+    --success-bg: #d4edda; --success-text: #155724;
+    --danger-bg: #f8d7da;  --danger-text: #721c24;
+    --info-bg: #d1ecf1;    --info-text: #0c5460;
 }
 /* #endregion */
 
@@ -16,11 +22,18 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%; /* Nutné pro sticky footer */
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--bg-light);
     color: var(--text-dark);
     line-height: 1.6;
+    /* Flexbox layout pro sticky footer */
+    display: flex;
+    flex-direction: column; 
 }
 
 a.back-link {
@@ -34,7 +47,12 @@ a.back-link {
 }
 /* #endregion */
 
-/* #region 3. ROZVRŽENÍ A KONTEJNERY (LAYOUT) */
+/* #region 3. ROZVRŽENÍ (LAYOUT & FOOTER) */
+.main-content {
+    flex: 1; /* Roztáhne obsah, aby patička zůstala dole */
+    width: 100%;
+}
+
 .container-sm {
     max-width: 450px;
     margin: 50px auto;
@@ -66,9 +84,21 @@ a.back-link {
     font-size: 1.8rem;
     font-weight: bold;
 }
+
+/* Patička */
+.footer {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    padding: 20px 0;
+    margin-top: auto;
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    width: 100%;
+}
 /* #endregion */
 
-/* #region 4. HLAVIČKA A NAVIGACE (HEADER & NAV) */
+/* #region 4. HLAVIČKA A NAVIGACE */
 .site-header {
     display: flex;
     flex-direction: column;
@@ -137,6 +167,15 @@ a.back-link {
     width: 100%;
 }
 
+/* Panel uživatele (Desktop) - zarovnání doprava */
+.user-panel {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Dropdown Menu */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -183,7 +222,55 @@ a.back-link {
 }
 /* #endregion */
 
-/* #region 5. KOMPONENTY: KARTY (CARDS) */
+/* #region 5. KOMPONENTY: UI ELEMENTY (ALERTS & BADGES) */
+/* Upozornění (Alerts) */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+.alert-success {
+    color: var(--success-text);
+    background-color: var(--success-bg);
+    border-color: #c3e6cb;
+}
+
+.alert-danger, .alert-error {
+    color: var(--danger-text);
+    background-color: var(--danger-bg);
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+    color: var(--info-text);
+    background-color: var(--info-bg);
+    border-color: #bee5eb;
+}
+
+/* Štítky (Badges) */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.badge-primary { background-color: var(--primary); }
+.badge-success { background-color: #28a745; }
+.badge-warning { background-color: #ffc107; color: #212529; }
+/* #endregion */
+
+/* #region 6. KOMPONENTY: KARTY (CARDS) */
 .card {
     background: white;
     padding: 30px;
@@ -235,7 +322,7 @@ a.back-link {
 }
 /* #endregion */
 
-/* #region 6. KOMPONENTY: FORMULÁŘE (FORMS) */
+/* #region 7. KOMPONENTY: FORMULÁŘE (FORMS) */
 .form-group {
     margin-bottom: 15px;
 }
@@ -277,7 +364,7 @@ select.form-control {
 }
 /* #endregion */
 
-/* #region 7. KOMPONENTY: TLAČÍTKA (BUTTONS) */
+/* #region 8. KOMPONENTY: TLAČÍTKA (BUTTONS) */
 .btn {
     display: inline-block;
     background-color: var(--primary);
@@ -329,11 +416,11 @@ select.form-control {
     text-decoration: none; 
     cursor: not-allowed;
     user-select: none;
-    pointer-events: none;
+    pointer-events: none; /* Zamezí kliknutí */
 }
 /* #endregion */
 
-/* #region 8. KOMPONENTY: TABULKY (TABLES) */
+/* #region 9. KOMPONENTY: TABULKY (TABLES) */
 .table-wrap {
   max-width: 1200px;
   margin: 0 auto;
@@ -343,7 +430,7 @@ select.form-control {
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px
+  min-width: 600px; /* Zabrání deformaci na mobilu */
 }
 
 .data-table th,
@@ -390,14 +477,14 @@ select.form-control {
 }
 /* #endregion */
 
-/* #region 9. POMOCNÉ TŘÍDY (UTILITIES) */
+/* #region 10. POMOCNÉ TŘÍDY (UTILITIES) */
 .text-bold { font-weight: bold; }
 .text-muted { color: #666; font-size: 0.9em; }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
 /* #endregion */
 
-/* #region 10. RESPONSIVITA (MEDIA QUERIES) */
+/* #region 11. RESPONSIVITA (MEDIA QUERIES) */
 @media (max-width: 600px) {
     .form-grid { 
         grid-template-columns: 1fr; 
@@ -415,9 +502,11 @@ select.form-control {
         gap: 10px; 
         align-items: center; 
     }
+    /* Na mobilu user-panel centrujeme, na desktopu je vpravo */
     .user-panel { 
         margin-left: 0; 
         margin-top: 10px; 
+        justify-content: center;
     }
 }
 /* #endregion */
