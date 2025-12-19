@@ -484,29 +484,97 @@ select.form-control {
 .text-center { text-align: center; }
 /* #endregion */
 
-/* #region 11. RESPONSIVITA (MEDIA QUERIES) */
-@media (max-width: 600px) {
+/* #region 11. RESPONSIVITA A MOBILNÍ OPTIMALIZACE */
+@media (max-width: 768px) {
+    
+    /* --- 1. ROZLOŽENÍ A KONTEJNERY --- */
+    /* Zmenšení okrajů, aby se obsah vešel na malé displeje */
+    .container-sm, .container-md, .container-lg {
+        padding: 10px;
+        margin-top: 15px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Formuláře pod sebe místo vedle sebe */
     .form-grid { 
         grid-template-columns: 1fr; 
+        gap: 15px;
     }
+
+    /* --- 2. OPRAVA TABULEK (To nejdůležitější) --- */
+    /* Umožní skrolování tabulky do boku, nerozbije stránku */
+    .card {
+        padding: 15px; /* Méně místa uvnitř karty */
+        overflow-x: auto; 
+    }
+    
+    /* Zmenšení písma v tabulce, aby se tam toho vešlo víc */
+    .data-table th, .data-table td {
+        padding: 8px 6px; 
+        font-size: 0.85rem;
+        white-space: nowrap; /* Zabrání zalamování textu v buňkách */
+    }
+
+    /* --- 3. HLAVIČKA A NAVIGACE --- */
     .header-top { 
         flex-direction: column; 
         text-align: center; 
+        padding: 10px;
     }
+    
     .navbar-container { 
         height: auto; 
-        padding: 10px; 
+        padding: 0; 
     }
+    
     .main-nav { 
         flex-direction: column; 
-        gap: 10px; 
-        align-items: center; 
+        width: 100%;
+        gap: 0; 
+        align-items: stretch;
     }
-    /* Na mobilu user-panel centrujeme, na desktopu je vpravo */
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        border-bottom: 1px solid #f1f1f1;
+        display: block;
+    }
+
+    /* Uživatelský panel pod menu */
     .user-panel { 
         margin-left: 0; 
-        margin-top: 10px; 
+        margin-top: 0; 
+        padding: 10px;
         justify-content: center;
+        background-color: #fafafa;
+        width: 100%;
+    }
+
+    /* --- 4. TLAČÍTKA A OVLÁDÁNÍ --- */
+    .page-header-row {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    /* Velká tlačítka přes celou šířku */
+    .btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 8px;
+        box-sizing: border-box;
+    }
+
+    /* Odkazy v tabulce (Upravit/Smazat) necháme vedle sebe */
+    .btn-link, .btn-danger {
+        display: inline-block;
+        width: auto;
+        padding: 6px 12px;
+        margin: 2px;
     }
 }
 /* #endregion */
