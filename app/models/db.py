@@ -18,7 +18,7 @@ class Users(Base):
     is_active = Column(Boolean, default=True)
     adresa = Column(String(200))
     telefon = Column(String(20))
-    email = Column(String(100), nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
     
     role = relationship("Role", secondary="USERROLE", back_populates="users")
     vina = relationship("Vino", back_populates="vinar", cascade="all, delete-orphan")
@@ -33,7 +33,7 @@ class UserRole(Base):
 class Rocnik(Base):
     __tablename__ = "ROCNIK"
     id = Column(Integer, primary_key=True, index=True)
-    rok = Column(Integer, nullable=False)
+    rok = Column(Integer, unique=True, nullable=False)
     is_active = Column(Boolean, default=False)
     
     vina = relationship("Vino", back_populates="rocnik", cascade="all, delete-orphan")
