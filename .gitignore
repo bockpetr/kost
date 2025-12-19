@@ -1,0 +1,35 @@
+# --- Python kompilované soubory ---
+# Ignorujeme cache soubory všude v projektu (i v podsložkách)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtuální prostředí (Virtual Environment) ---
+# Ignorujeme složky s knihovnami Pythonu
+venv/
+.venv/
+env/
+ENV/
+
+# --- Proměnné prostředí a Tajemství ---
+# Kriticky důležité - obsahuje hesla a tajné klíče!
+.env
+.env.local
+
+# --- Databáze a Data ---
+# Ignorujeme celou složku data (kde je kost.db)
+data/
+# Pro jistotu ignorujeme databázové soubory kdekoli v projektu
+*.db
+*.sqlite
+*.sqlite3
+
+# --- Dokumentace ---
+docs/
+
+# --- Operační systém a Editory ---
+# Soubory, které vytváří systém nebo editor a v repozitáři nemají co dělat
+.DS_Store
+.vscode/
+.idea/

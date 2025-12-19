@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Správa uživatelů{% endblock %}
+
+{% block content %}
+<div class="container-lg">
+    
+    <div class="page-header-row">
+        <h2 class="page-title">Správa uživatelů</h2>
+        <a href="/users/pridat" class="btn">Nový uživatel</a>
+    </div>
+
+    <div style="margin-bottom: 20px;">
+        <input type="text" id="searchInput" onkeyup="filterUsers()" 
+               placeholder="🔍 Hledat login, jméno nebo email..." 
+               class="form-control" 
+               style="max-width: 400px; border: 2px solid #eee;">
+    </div>
+
+    <div class="card" style="padding: 0;">
+        <table class="data-table" id="usersTable">
+            <thead>
+                <tr>
+                    <th class="sortable" onclick="sortTable(0)">ID ↕</th>
+                    <th class="sortable" onclick="sortTable(1)">Login ↕</th>
+                    <th class="sortable" onclick="sortTable(2)">Jméno ↕</th>
+                    <th class="sortable" onclick="sortTable(3)">Email ↕</th>
+                    <th>Telefon</th>
+                    <th>Adresa</th>
+                    <th class="sortable" onclick="sortTable(6)">Role ↕</th>
+                    <th class="sortable" onclick="sortTable(7)">Stav ↕</th>
+                    <th>Akce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for u in users %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td>{{ u.id }}</td>
+                    <td class="text-bold">{{ u.login }}</td>
+                    <td>{{ u.jmeno }}</td>
+                    <td>{{ u.email }}</td>
+                    <td>{{ u.telefon or '-' }}</td>
+                    <td>{{ u.adresa or '-' }}</td>
+                    
+                    <td>
+                        {% for role in u.role %}
+                            <span style="background: #eee; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; margin-right: 2px; color: #333;">
+                                {{ role.nazev }}
+                            </span>
+                        {% endfor %}
+                    </td>
+
+                    <td>
+                        {% if u.is_active %}
+                            <span>Aktivní</span>
+                        {% else %}
+                            <span>Neaktivní</span>
+                        {% endif %}
+                    </td>
+
+                    <td class="text-right" style="white-space: nowrap;">
+                        <a href="/users/upravit/{{ u.id }}" class="btn-link">Upravit</a>
+                        
+                        {% if user != u.login %}
+                            <a href="/users/smazat/{{ u.id }}" class="btn-danger"
+                               onclick="return confirm('Opravdu chcete smazat uživatele {{ u.jmeno }}?');">
+                                Smazat
+                            </a>
+                        {% else %}
+                             <span class="btn-disabled" title="Nelze smazat vlastní účet">Smazat</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function filterUsers() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("usersTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 1; i < tr.length; i++) {
+            var tdLogin = tr[i].getElementsByTagName("td")[1];
+            var tdName = tr[i].getElementsByTagName("td")[2];
+            var tdEmail = tr[i].getElementsByTagName("td")[3];
+            
+            if (tdLogin || tdName || tdEmail) {
+                var txtLogin = tdLogin.textContent || tdLogin.innerText;
+                var txtName = tdName.textContent || tdName.innerText;
+                var txtEmail = tdEmail.textContent || tdEmail.innerText;
+                
+                if (txtLogin.toUpperCase().indexOf(filter) > -1 || 
+                    txtName.toUpperCase().indexOf(filter) > -1 || 
+                    txtEmail.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }       
+        }
+    }
+
+    function sortTable(n) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("usersTable");
+        switching = true;
+        dir = "asc";
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+            
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                
+                var xContent = x.innerText.toLowerCase();
+                var yContent = y.innerText.toLowerCase();
+
+                var xNum = parseFloat(xContent);
+                var yNum = parseFloat(yContent);
+                var isNumeric = !isNaN(xNum) && !isNaN(yNum);
+
+                if (dir == "asc") {
+                    if (isNumeric) {
+                        if (xNum > yNum) { shouldSwitch = true; break; }
+                    } else {
+                        if (xContent > yContent) { shouldSwitch = true; break; }
+                    }
+                } else if (dir == "desc") {
+                    if (isNumeric) {
+                        if (xNum < yNum) { shouldSwitch = true; break; }
+                    } else {
+                        if (xContent < yContent) { shouldSwitch = true; break; }
+                    }
+                }
+            }
+            
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                switchcount ++;      
+            } else {
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}

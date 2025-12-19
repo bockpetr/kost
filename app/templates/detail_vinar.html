@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Profil vinaře - {{ vinar.jmeno }}{% endblock %}
+
+{% block content %}
+<div class="container-md">
+    
+    <a href="/" class="back-link">&larr; Zpět na seznam</a>
+
+    <div class="card">
+        <div class="card-header detail-header">
+            <h2 class="page-title">{{ vinar.jmeno }}</h2>
+        </div>
+
+        <div class="detail-info-list">
+            
+            <div class="detail-row">
+                <span class="text-muted">Email:</span>
+                <span class="detail-value">{{ vinar.email or 'Neuvedeno' }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="text-muted">Telefon:</span>
+                <span class="detail-value">{{ vinar.telefon or 'Neuvedeno' }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="text-muted">Adresa:</span>
+                <span class="detail-value">{{ vinar.adresa or 'Neuvedeno' }}</span>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
