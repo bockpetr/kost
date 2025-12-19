@@ -9,11 +9,7 @@ from .vina import router as vina_router
 def register_routers(app: FastAPI) -> None:
     """
     Připojí všechny routery k instanci FastAPI aplikace.
-    
-    Args:
-        app (FastAPI): Hlavní instance aplikace.
     """
-    
     app.include_router(auth_router, prefix="/auth", tags=["auth"])
     app.include_router(home_router, tags=["home"])
     app.include_router(rocniky_router, prefix="/rocniky", tags=["rocniky"])
