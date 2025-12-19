@@ -1,1 +1,0 @@
-Get-ChildItem -Filter "__pycache__" -Recurse -Directory | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
