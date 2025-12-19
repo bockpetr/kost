@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    db_path: str = "kost.db"
+    db_path: str = "data/kost.db"
     debug: bool = True
     
     SECRET_KEY: str = "super-tajny-klic-ktery-nikdo-neuhadne-123456"
