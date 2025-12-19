@@ -94,7 +94,7 @@ def smazat_rocnik(
     admin_check: dict = Depends(require_admin)
 ):
     """
-    Smaže ročník i se všecmi víny a jejich hodnocením v daném ročníku
+    Smaže ročník i se všemi víny a jejich hodnocením v daném ročníku
     díky parametrům cascade="all, delete-orphan" v db.py
     """
     rocnik = get_rocnik_by_id(db, rocnik_id)

@@ -18,7 +18,7 @@ class Users(Base):
     telefon = Column(String(20))
     email = Column(String(100), nullable=False)
     
-    role = relationship("Role", secondary="USERROLE", backref="users")
+    role = relationship("Role", secondary="USERROLE", back_populates="users")
     vina = relationship("Vino", back_populates="vinar", cascade="all, delete-orphan")
     hodnoceni = relationship("Hodnoceni", back_populates="hodnotitel", cascade="all, delete-orphan")
 
@@ -57,7 +57,7 @@ class Hodnoceni(Base):
     __tablename__ = "HODNOCENI"
     id = Column(Integer, primary_key=True, index=True)
     body = Column(Integer)
-    poznamka = Column(String(1000))
+    poznamka = Column(Text)
     
     vino_id = Column(Integer, ForeignKey("VINO.id"), nullable=False)
     hodnotitel_id = Column(Integer, ForeignKey("USERS.id"), nullable=False)

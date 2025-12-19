@@ -18,21 +18,19 @@ def get_nejnovejsi_rocnik(db: Session) -> Optional[Rocnik]:
     """Vrátí ročník s nejvyšším letopočtem (pro kontrolu aktivace)."""
     return db.query(Rocnik).order_by(Rocnik.rok.desc()).first()
 
-def set_active_rocnik_logic(db: Session, rocnik_id: int):
+def set_active_rocnik_logic(db: Session, rocnik_id: int) -> None:
     """
     Nastaví vybraný ročník jako aktivní a VŠECHNY ostatní deaktivuje.
     """
-    # 1. Deaktivovat vše
     db.query(Rocnik).update({Rocnik.is_active: False})
     
-    # 2. Aktivovat vybraný
     rocnik = db.query(Rocnik).filter(Rocnik.id == rocnik_id).first()
     if rocnik:
         rocnik.is_active = True
     
     db.commit()
 
-def deactivate_rocnik_logic(db: Session, rocnik_id: int):
+def deactivate_rocnik_logic(db: Session, rocnik_id: int) -> None:
     """
     Pouze deaktivuje daný ročník. Žádný jiný se neaktivuje.
     Výsledkem je stav, kdy žádný ročník není aktivní.

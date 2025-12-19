@@ -61,11 +61,6 @@ def pridat_vino_page(
             "error": "Pozor: Není nastaven aktivní ročník, nelze přidávat vína!" if not active_rocnik else None
         }
     )
-        
-    return ctx["request"].app.state.templates.TemplateResponse(
-        "pridat_vino.html",
-        {**ctx}
-    )
 
 @router.post("/pridat")
 def pridat_vino_submit(

@@ -5,19 +5,20 @@ from typing import List, Tuple, Optional
 from app.models.db import Vino, Hodnoceni, Users
 from app.models.schemas import VinoCreate, VinoWithStats
 
-def get_vina_by_rocnik(db: Session, rocnik_id: int):
+def get_vina_by_rocnik(
+    db: Session,
+    rocnik_id: int
+) -> List[VinoWithStats]:
     """
     Vrátí seznam vín pro daný ročník seřazený podle hodnocení.
-    Vrací seznam Pydantic modelů VinoWithStats.
     """
-
     vyber_vin = (
         db.query(
             Vino,
             func.avg(Hodnoceni.body).label("prumer_body"),
             func.count(Hodnoceni.id).label("pocet_hodnoceni")
         )
-        .outerjoin(Hodnoceni)
+        .outerjoin(Vino.Hodnoceni)
         .options(joinedload(Vino.vinar))
         .filter(Vino.rocnik_id == rocnik_id)
         .group_by(Vino.id)
@@ -38,12 +39,10 @@ def get_vina_by_rocnik(db: Session, rocnik_id: int):
 def get_vino_detail(
     db: Session,
     vino_id: int
-):
+) -> Tuple[Optional[Vino], List[Hodnoceni]]:
     """
     Vrátí objekt vína a seznam hodnocení.
-    Díky ORM už 'wine' obsahuje seznam 'hodnoceni' i objekt 'vinar'.
     """
-
     vino = (
         db.query(Vino)
         .options(
@@ -65,7 +64,7 @@ def get_vina_by_vinar(
     db: Session,
     rocnik_id: int,
     vinar_id: int
-):
+) -> List[Vino]:
     """
     Vrátí vína konkrétního vinaře v daném ročníku.
     """

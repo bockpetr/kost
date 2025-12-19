@@ -11,7 +11,7 @@ def get_user_roles(db: Session, login: str)-> List[str]:
         return [role.nazev for role in user.role]
     return []
 
-def get_public_user_detail(db: Session, user_id: int):
+def get_public_user_detail(db: Session, user_id: int) -> Optional[Users]:
     return db.query(Users).filter(Users.id == user_id).first()
 
 def get_all_users(db: Session) -> List[Users]:
