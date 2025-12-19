@@ -1,18 +1,15 @@
-/* ==========================================================================
-   1. PROMĚNNÉ A KONFIGURACE
-   ========================================================================== */
+/* #region 1. PROMĚNNÉ A KONFIGURACE */
 :root {
     --primary: #722F37; /* Vínová */
-    --secondary: #C5A059; /* Zlatá */
+    --secondary: #a37f38; /* Zlatá */
     --bg-light: #f9f7f2; /* Krémová */
     --text-dark: #333;
     --white: #ffffff;
     --shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
+/* #endregion */
 
-/* ==========================================================================
-   2. ZÁKLADNÍ NASTAVENÍ (RESET & BASE)
-   ========================================================================== */
+/* #region 2. ZÁKLADNÍ NASTAVENÍ (RESET & BASE) */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -35,10 +32,9 @@ a.back-link {
     margin-bottom: 20px;
     transition: color 0.2s;
 }
+/* #endregion */
 
-/* ==========================================================================
-   3. ROZVRŽENÍ A KONTEJNERY (LAYOUT)
-   ========================================================================== */
+/* #region 3. ROZVRŽENÍ A KONTEJNERY (LAYOUT) */
 .container-sm {
     max-width: 450px;
     margin: 50px auto;
@@ -70,10 +66,9 @@ a.back-link {
     font-size: 1.8rem;
     font-weight: bold;
 }
+/* #endregion */
 
-/* ==========================================================================
-   4. HLAVIČKA A NAVIGACE (HEADER & NAV)
-   ========================================================================== */
+/* #region 4. HLAVIČKA A NAVIGACE (HEADER & NAV) */
 .site-header {
     display: flex;
     flex-direction: column;
@@ -142,7 +137,6 @@ a.back-link {
     width: 100%;
 }
 
-/* Dropdown Menu */
 .dropdown {
     position: relative;
     display: inline-block;
@@ -187,10 +181,9 @@ a.back-link {
     border-top: 1px solid #eee;
     margin: 4px 0;
 }
+/* #endregion */
 
-/* ==========================================================================
-   5. KOMPONENTY: KARTY (CARDS)
-   ========================================================================== */
+/* #region 5. KOMPONENTY: KARTY (CARDS) */
 .card {
     background: white;
     padding: 30px;
@@ -207,7 +200,6 @@ a.back-link {
     font-weight: bold;
 }
 
-/* Detailní pohledy v kartách */
 .detail-header {
     text-align: left;
     margin-bottom: 20px;
@@ -241,10 +233,9 @@ a.back-link {
     font-weight: bold;
     text-align: right;
 }
+/* #endregion */
 
-/* ==========================================================================
-   6. KOMPONENTY: FORMULÁŘE (FORMS)
-   ========================================================================== */
+/* #region 6. KOMPONENTY: FORMULÁŘE (FORMS) */
 .form-group {
     margin-bottom: 15px;
 }
@@ -284,10 +275,9 @@ select.form-control {
 .form-actions {
     margin-top: 30px;
 }
+/* #endregion */
 
-/* ==========================================================================
-   7. KOMPONENTY: TLAČÍTKA (BUTTONS)
-   ========================================================================== */
+/* #region 7. KOMPONENTY: TLAČÍTKA (BUTTONS) */
 .btn {
     display: inline-block;
     background-color: var(--primary);
@@ -339,11 +329,11 @@ select.form-control {
     text-decoration: none; 
     cursor: not-allowed;
     user-select: none;
+    pointer-events: none;
 }
+/* #endregion */
 
-/* ==========================================================================
-   8. KOMPONENTY: TABULKY (TABLES)
-   ========================================================================== */
+/* #region 8. KOMPONENTY: TABULKY (TABLES) */
 .table-wrap {
   max-width: 1200px;
   margin: 0 auto;
@@ -353,6 +343,7 @@ select.form-control {
 .data-table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px
 }
 
 .data-table th,
@@ -397,18 +388,16 @@ select.form-control {
     background-color: #eee;
     color: var(--primary);
 }
+/* #endregion */
 
-/* ==========================================================================
-   9. POMOCNÉ TŘÍDY (UTILITIES)
-   ========================================================================== */
+/* #region 9. POMOCNÉ TŘÍDY (UTILITIES) */
 .text-bold { font-weight: bold; }
 .text-muted { color: #666; font-size: 0.9em; }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
+/* #endregion */
 
-/* ==========================================================================
-   10. RESPONSIVITA (MEDIA QUERIES)
-   ========================================================================== */
+/* #region 10. RESPONSIVITA (MEDIA QUERIES) */
 @media (max-width: 600px) {
     .form-grid { 
         grid-template-columns: 1fr; 
@@ -431,3 +420,4 @@ select.form-control {
         margin-top: 10px; 
     }
 }
+/* #endregion */

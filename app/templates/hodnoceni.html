@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container-lg">
     
-    {% if not wines_data %}
+    {% if not vina_data %}
         <div class="page-header-row">
             <h2 class="page-title">Hodnocení vín ({{ active_rocnik.rok }})</h2>
         </div>
@@ -40,7 +40,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for item in wines_data %}
+                        {% for item in vina_data %}
                         <tr>
                             <td style="font-weight: bold;">
                                 <a href="/vino/{{ item.vino.id }}" target="_blank" class="link-wine" title="Otevřít detail">

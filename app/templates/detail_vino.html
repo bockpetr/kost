@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ wine.nazev }}{% endblock %}
+{% block title %}{{ vino.nazev }}{% endblock %}
 
 {% block content %}
 <div class="container-md">
@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header detail-header">
-            <h2 class="page-title">{{ wine.nazev }}</h2>
+            <h2 class="page-title">{{ vino.nazev }}</h2>
         </div>
 
         <div class="detail-info-list">
@@ -17,53 +17,53 @@
             <div class="detail-row">
                 <span class="text-muted">Vinař:</span>
                 <span class="detail-value">
-                    <a href="/vinar/{{ wine.vinar_id }}" class="link-vinar" style="font-size: 1.1em;">
-                        {{ wine.vinar.jmeno }}
+                    <a href="/vinar/{{ vino.vinar_id }}" class="link-vinar" style="font-size: 1.1em;">
+                        {{ vino.vinar.jmeno }}
                     </a>
                 </span>
             </div>
 
             <div class="detail-row">
                 <span class="text-muted">Barva:</span>
-                <span class="detail-value">{{ wine.barva if wine.barva else '-' }}</span>
+                <span class="detail-value">{{ vino.barva if vino.barva else '-' }}</span>
             </div>
 
             <div class="detail-row">
                 <span class="text-muted">Odrůda:</span>
-                <span class="detail-value">{{ wine.odruda or '-' }}</span>
+                <span class="detail-value">{{ vino.odruda or '-' }}</span>
             </div>
 
             <div class="detail-row">
                 <span class="text-muted">Přívlastek:</span>
-                <span class="detail-value">{{ wine.privlastek if wine.privlastek else '-' }}</span>
+                <span class="detail-value">{{ vino.privlastek if vino.privlastek else '-' }}</span>
             </div>
 
             <div class="detail-row">
                 <span class="text-muted">Sladkost:</span>
-                <span class="detail-value">{{ wine.sladkost if wine.sladkost else '-' }}</span>
+                <span class="detail-value">{{ vino.sladkost if vino.sladkost else '-' }}</span>
             </div>
 
             <div class="detail-row">
                 <span class="text-muted">Ročník sklizně:</span>
-                <span class="detail-value">{{ wine.rok_sklizne or '-' }}</span>
+                <span class="detail-value">{{ vino.rok_sklizne or '-' }}</span>
             </div>   
         </div>
     </div>
 
     <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--primary);">Hodnocení poroty</h3>
 
-    {% if ratings %}
+    {% if hodnoceni %}
         <div style="display: grid; gap: 15px;">
-            {% for r in ratings %}
+            {% for h in hodnoceni %}
             <div class="card" style="padding: 15px; border-left: 5px solid var(--primary);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                    <strong>{{ r.hodnotitel.jmeno }}</strong>
+                    <strong>{{ h.hodnotitel.jmeno }}</strong>
                     <span style="font-weight: bold; font-size: 1.2rem; color: #2ecc71;">
-                        {{ r.body }} b.
+                        {{ h.body }} b.
                     </span>
                 </div>
-                {% if r.poznamka %}
-                    <p style="margin: 0; color: #666; font-style: italic;">"{{ r.poznamka }}"</p>
+                {% if h.poznamka %}
+                    <p style="margin: 0; color: #666; font-style: italic;">"{{ h.poznamka }}"</p>
                 {% else %}
                     <p style="margin: 0; color: #ccc; font-style: italic;">Bez slovního hodnocení</p>
                 {% endif %}

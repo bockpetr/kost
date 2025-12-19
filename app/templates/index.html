@@ -35,7 +35,7 @@
             </thead>
     
             <tbody>
-                {% for vino in wines %}
+                {% for vino in vina %}
                 <tr>
                     <td class="text-bold"><a href="/vino/{{ vino.id }}" class="link-wine">{{ vino.nazev }}</a></td>
                     <td><a href="/vinar/{{ vino.vinar.id }}" class="link-vinar">{{ vino.vinar.jmeno }}</a></td>
