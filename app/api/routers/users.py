@@ -200,6 +200,7 @@ def pridat_uzivatele_submit(
     request: Request,
     login: str = Form(...),
     password: str = Form(...),
+    password_confirm: str = Form(...),
     jmeno: str = Form(...),
     email: str = Form(...),
     telefon: str = Form(None),
@@ -214,6 +215,16 @@ def pridat_uzivatele_submit(
     Nejprve ověří, zda login už neexistuje. Pokud je vše v pořádku, vytvoří uživatele,
     zahashuje heslo a přiřadí vybrané role.
     """
+    if password != password_confirm:
+        return ctx["request"].app.state.templates.TemplateResponse(
+            "pridat_uzivatele.html",
+            {
+                **ctx, 
+                "all_roles": all_roles, 
+                "error": "Zadaná hesla se neshodují!"
+            }
+        )
+    
     if get_user_by_login(db, login):
         all_roles = get_all_roles(db)
         return ctx["request"].app.state.templates.TemplateResponse(

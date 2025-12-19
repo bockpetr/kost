@@ -8,6 +8,12 @@
     <div class="card">
         <h2 class="card-header">Přihlášení</h2>
 
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endif %}
+
         <form method="post" action="/auth/login">
             <div class="form-group">
                 <label for="username" class="form-label">Uživatelské jméno:</label>

@@ -9,6 +9,12 @@
     <div class="card">
         <h2 class="card-header">Můj profil: {{ profil_user.jmeno }}</h2>
             
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endif %}
+        
         <form method="post" action="/users/profil">
             
             <div class="form-group">

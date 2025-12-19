@@ -9,6 +9,12 @@
     <div class="card">
         <h2 class="card-header">Úprava uživatele: {{ user_to_edit.login }}</h2>
 
+        {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+        {% endif %}
+        
         <form method="post" action="/users/upravit/{{ user_to_edit.id }}">
 
             <div class="form-group">
