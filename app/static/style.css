@@ -576,5 +576,22 @@ select.form-control {
         padding: 6px 12px;
         margin: 2px;
     }
+
+    /* --- 5. ÚPRAVA DROPDOWN MENU PRO MOBILY --- */
+    
+    /* Na mobilu ZAKÁŽEME otevírání při "najetí" (protože to zůstává viset) */
+    .dropdown:hover .dropdown-content {
+        display: none;
+    }
+
+    /* Na mobilu POVOLÍME otevírání pouze pokud má třídu .show */
+    /* !important zajistí, že to přebije to pravidlo výše */
+    .dropdown-content.show {
+        display: block !important;
+        position: static; /* Aby se menu roztáhlo a neodskakovalo */
+        width: 100%;
+        box-shadow: none;
+        border: 1px solid #eee;
+    }
 }
 /* #endregion */

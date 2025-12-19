@@ -28,7 +28,7 @@
         <div class="navbar-container">
             <nav class="main-nav">
                 <div class="dropdown">
-                    <a href="#" class="nav-link">Výběr ročníku ▾</a>
+                    <a href="#" class="nav-link" onclick="toggleDropdown(event)">Výběr ročníku ▾</a>
                     <div class="dropdown-content">
                         {% for r in all_rocniky %}
                             <a href="/?rocnik_id={{ r.id }}">{{ r.rok }}</a>
@@ -52,7 +52,7 @@
                 <div class="user-panel" style="margin-left: auto;">
                     {% if user %}
                         <div class="dropdown">
-                            <a href="#" class="nav-link" style="text-transform: none;">👤 {{ user }} ▾ </a>
+                            <a href="#" class="nav-link" style="text-transform: none;" onclick="toggleDropdown(event)">👤 {{ user }} ▾ </a>
                             <div class="dropdown-content">
                                 <a href="/users/profil">Můj profil</a>
                 
@@ -72,6 +72,32 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <script>
+        function toggleDropdown(event) {
+        // Tento skript se spustí jen na mobilu, kde chceme klikat.
+        // Na desktopu bude fungovat hover (protože CSS ho tam nezakázalo), 
+        // ale kliknutí také neuškodí.
+        
+            event.preventDefault(); 
+            event.stopPropagation();
+        
+            var content = event.currentTarget.nextElementSibling;
+            content.classList.toggle('show'); // Jednoduše přepne zapnuto/vypnuto
+        }
+
+        // Zavření při kliknutí vedle
+        window.onclick = function(event) {
+            if (!event.target.matches('.nav-link')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    if (dropdowns[i].classList.contains('show')) {
+                        dropdowns[i].classList.remove('show');
+                    }
+                }
+            }
+        }
+</script>
 
 </body>
 </html>
